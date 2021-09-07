@@ -1,0 +1,146 @@
+#contenedor{
+    display: flex;
+    flex-direction: row;
+}
+#columnaizquierda{
+    height: 100vh;
+    width: 20vw;
+    background-color: dimgray;
+}
+#columnaderecha{
+    height: 100vh;
+    width: 20vw;
+    background-color: dimgray;
+}
+#columnacentral{
+    height: 100vh;
+    width: 60vw;
+    background-color: gray;
+    flex-direction: column;
+}
+#espacioseguro{
+    width: 100vw;
+    height: 10vh;
+    background: darkseagreen;
+}
+.publicacion{
+    width: 60vw;
+    min-height: 40vh;
+    background-color: indianred;
+    margin-bottom: 3px;
+}
+#menuizquierda{
+    width: 100vw;
+    height: 75vh;
+    background-color: mediumpurple;
+    margin-top: 50px;
+}
+#menuderecha{
+    width: 100vw;
+    height: 75vh;
+    background-color: mediumpurple;
+    margin-top: 50px;
+}
+.cont-publicacion{
+    width: 30vw;
+    height: 40vh;
+    background-color: darkred;
+    flex-direction: row;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+.perfilmain{
+    width: 60vw;
+    min-height: 60vh;
+    background-color: #d5d5d5;
+    margin-bottom: 3px;
+}
+.cont-perfil{
+    border-radius: 30px;
+    width: 50vw;
+    height: 60vh;
+    background-color: #f6f6f6;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+.perfilbanner{
+    width: 40vw;
+    height: 13vh;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+#profban{
+    margin-top: 5px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 15px;
+}
+.perfildetalles{
+    margin-top: 8px;
+    width: 40vw;
+    height: 15vh;
+    flex-direction: row;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+.perfilfoto{
+    width: 15vh;
+    height: 15vh;
+    float: left;
+}
+#profpic{
+    width: 95%;
+    height: 95%;
+    border-radius: 100px;
+    object-fit: cover;
+    margin: auto auto auto auto;
+    display: block;
+}
+.perfilnombre{
+    width: 8vw;
+    height: 15vh;
+    float: left;
+    font-family: "Arial";
+    font-size: 20px;
+    padding-left: 8px;
+}
+.perfilpublicaciones{
+    width: 8vw;
+    height: 15vh;
+    font-family: "Arial";
+    float: left;
+    font-size: 18px;
+    padding: 2px;
+}
+.perfilseguidores{
+    width: 8vw;
+    height: 15vh;
+    font-family: "Arial";
+    float: left;
+    font-size: 18px;
+    padding: 2px;
+}
+.perfilseguidos{
+    width: 8vw;
+    height: 15vh;
+    font-family: "Arial";
+    float: left;
+    font-size: 18px;
+    padding: 2px;
+}
+.perfilbio{
+    margin-top: 8px;
+    width: 30vw;
+    height: 15vh;
+    flex-direction: row;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <title>Title</title>
+</head>
+<body>
+    <div id="contenedor">
+        <div id="columnaizquierda">
+            <div id="menuizquierda">
+                MENU IZQUIERDA
+                <div id="menuizquni">
+
+                </div>
+                <div id="menuizqperfil">
+
+                </div>
+                <div id="menuizqopciones">
+
+                </div>
+            </div>
+        </div>
+        <div id="columnacentral">
+            <div id="espacioseguro">
+                ESPACIO SEGURO
+            </div>
+            <div class="publicacion">
+                <div id="headerEdit">
+                    Editar Perfil
+                </div>
+                    <div class="cont-publicacion">
+
+                         <div id="editarImagenes">
+                             <div class="profile-pic">
+                                 <label class="-label" for="file">
+                                     <span class="glyphicon glyphicon-camera"></span>
+                                     <span>Change Image</span>
+                                 </label>
+                                 <input id="file" type="file" onchange="loadFile(event)"/>
+                                 <img src="https://cdn.pixabay.com/photo/2017/08/06/21/01/louvre-2596278_960_720.jpg" id="output" width="200" />
+                             </div>
+
+                             <div class="profile-banner">
+                                 <label class="-labelBanner" for="file">
+                                     <span class="glyphicon glyphicon-camera"></span>
+                                     <span>Change Image</span>
+                                 </label>
+                                 <input id="fileBanner" type="fileBanner" onchange="loadFileBanner(event)"/>
+                                 <img src="https://cdn.pixabay.com/photo/2017/08/06/21/01/louvre-2596278_960_720.jpg" id="outputBanner" width="200" />
+                             </div>
+                           <!-- <img class="ProfilePic" src="https://i.pinimg.com/originals/3f/0d/51/3f0d51c95a2bd3a2fc633fd44b78c2bb.jpg">-->
+                        </div>
+
+                        <!--<div id="editarBanner">
+
+                             <img class="ProfilePic" src="https://i.pinimg.com/originals/3f/0d/51/3f0d51c95a2bd3a2fc633fd44b78c2bb.jpg">
+                        </div>  -->
+
+
+                        <div id="editarInfo">
+                            <!-- https://codepen.io/azazy/pen/EgdXxG -->
+                            <div id="opcionesEdit">
+                            Estado de estudio
+                            <br>
+                            <input id="estadoEstudio"  type="text" name="estadoEstudio" placeholder="Estudiante de X Año">
+                                <br>
+                            Campus
+                            <br>
+                            <input id="campus"  type="text" name="campus" placeholder="Tegucigalpa">
+                                <br>
+                            Numero de celular
+                            <br>
+                            <input id="numCelular"  type="text" name="numCelular" placeholder="9888-8888">
+                                <br>
+                            Softwares
+                            <br>
+                            <input id="softwares"  type="text" name="softwares" placeholder="Blender, Maya, Photoshop, Illustrator, After Effects, etc.">
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+
+            </div>
+
+        </div>
+        <div id="columnaderecha">
+            <div id="menuderecha">
+                MENU DERECHA
+                <div id="menuderbusqueda">
+
+                </div>
+                <div id="menudersugerencias">
+                    <div id="mdspersonas">
+
+                    </div>
+                    <div id="mdstags">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="script.js"></script>
+</body>
+</html>
