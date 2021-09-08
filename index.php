@@ -25,12 +25,12 @@
       <div class="container">
         <div class="row no-gutters">
           <div class="col-md-6">
-            <img src="/images/Login-Arte.png" alt="Image" class="img-fluid" width="80%">
+            <img src="images/Login-Arte.png" alt="Image" class="img-fluid" width="80%">
           </div>
           <div class="col-md-6 contents">
             <div class="row justify-content-center">
               <div class="col-md-8">
-                <img src="/images/Logo_UNITEC.png" alt="Image" class="img-fluid" width="50%">
+                <img src="images/Logo_UNITEC.png" alt="Image" class="img-fluid" width="50%">
                 <div class="mb-4">
                 <h3>Iniciar sesión</h3>
                 <p class="mb-4">Ingrese sus datos para continuar.</p>
@@ -58,18 +58,22 @@
                 <button type="submit" name="enviar" value="submit" class="btn btn-block btn-primary">CONTINUAR</button>
 
                 <?php
-                  if (isset($_POST['enviar'])) {
-                    require_once 'login.php';
-                    $conn = new mysqli($hn, $un, $pw, $db);
-                    if ($conn->connect_error) die("Error en Conexion");
+                if (isset($_POST['enviar'])) {
+                  require_once 'login.php';
+                  $conn = new mysqli($hn, $un, $pw, $db);
+                  if ($conn->connect_error) die("Error en Conexion");
 
-                    $usuario =  $_POST['user'];
-                    $contraseña =  $_POST['pass'];
+                  $usuario =  $_POST['user'];
+                  $contraseña =  $_POST['pass'];
 
-                    $query = "SELECT nombre, apellido, num_cuenta, num_telefono, correo, contrasenia FROM usuarios WHERE correo = '$usuario' && contrasenia = '$contraseña' ";
-                    $result = $conn->query($query);
+                  $query = "SELECT nombre, apellido, num_cuenta, num_telefono, correo, contrasenia FROM usuarios WHERE correo = '$usuario' && contrasenia = '$contraseña' ";
+                  $result = $conn->query($query);
 
-                    if (!$result) die("Fatal Error");
+                  if (!$result) die("Fatal Error");
+
+                  $row = $result->fetch_array(MYSQLI_ASSOC);
+
+                  if (($usuario != "" && $contraseña != "") && (($usuario == $row['correo']) && ($contraseña == $row['contrasenia']))) {
 
                     session_start();
                     $_SESSION['Nom'] = $row['nombre'];
@@ -79,9 +83,6 @@
                     $_SESSION['Correo'] = $row['correo'];
                     $_SESSION['Contra'] = $row['contrasenia'];
 
-                    $result->close();
-                    $conn->close();
-                    
                     if (isset($_POST['enviar'])){
                       ?>
                         <script type="text/javascript">
@@ -89,7 +90,28 @@
                         </script>
                       <?php
                     }
+
+                  } else if($usuario == "" || $contraseña == "") {
+                    ?>
+                      <div class="alert">
+                        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                        <strong>Error!</strong> Correo o contraseña no ingresada.
+                      </div>
+                    <?php
+                  } else if(($usuario != $row['correo']) && ($contraseña != $row['contrasenia'])) {
+                    ?>
+                      <div class="alert">
+                        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                        <strong>Error!</strong> Correo o contraseña incorrecta.
+                      </div>
+                    <?php
+                  } else {
+
                   }
+
+                  $result->close();
+                  $conn->close();
+                }
                 ?>
 
                 <div class="d-flex mb-5 align-items-center"> 

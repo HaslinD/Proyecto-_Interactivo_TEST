@@ -76,6 +76,66 @@
             <input type="password" placeholder="Ingrese Contraseña" name="contra" required>
 
             <button type="submit" name="enviar" value="submit" class="btn">REGISTRARSE</button>
+
+            <?php
+
+              require_once 'login.php';
+              $conn = new mysqli($hn, $un, $pw, $db);
+              if ($conn->connect_error) die("Error en Conexion");
+
+              if (isset($_POST['nombre']) && isset($_POST['apellido']) && isset($_POST['cuenta']) && isset($_POST['numero']) && isset($_POST['correo']) && isset($_POST['contra'])) {
+
+                  $Nombre = get_post($conn, 'nombre');
+                  $Apellido = get_post($conn, 'apellido');
+                  $NumCuenta = get_post($conn, 'cuenta');
+                  $NumTelefono = get_post($conn, 'numero');
+                  $Correo = get_post($conn, 'correo');
+                  $Contraseña = get_post($conn, 'contra');
+
+                  $query = "SELECT nombre, apellido, num_cuenta, num_telefono, correo, contrasenia FROM usuarios WHERE correo = '$Correo'";
+                  $result = $conn->query($query);
+
+                  if (!$result) die("Fatal Error");
+
+                  $row = $result->fetch_array(MYSQLI_ASSOC);
+
+                  if ($Correo != $row['correo']) {
+                    $query = "INSERT INTO usuarios (nombre, apellido, num_cuenta, num_telefono, correo, contrasenia)
+                              VALUES" . "('$Nombre','$Apellido','$NumCuenta','$NumTelefono','$Correo','$Contraseña')";
+
+                    $result = $conn->query($query);
+                    if (!$result) echo "INSERT no se ha realizado<br><br>";
+
+
+                    $nom_dir = "$Nombre"."_"."$Apellido"."_"."$NumCuenta";
+                    mkdir("Users/"."$nom_dir", 0700);
+
+                    if (isset($_POST['enviar'])){
+                      ?>
+                        <script type="text/javascript">
+                          window.location = "index.php";
+                        </script>
+                      <?php
+                    }
+                  } else if($Correo == $row['correo']) {
+                    ?>
+                      <div class="alert">
+                        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                        <strong>Error!</strong> El correo electronico que ingreso esta en uso.
+                      </div>
+                    <?php
+                  }
+                
+              }
+
+              $conn->close();
+
+              function get_post($conn, $var) {
+                return $conn->real_escape_string($_POST[$var]);
+              }
+
+
+              ?>
           </form>
         </div>
         
@@ -90,44 +150,3 @@
   </body>
 
 </html>
-
-<?php
-
-require_once 'login.php';
-$conn = new mysqli($hn, $un, $pw, $db);
-if ($conn->connect_error) die("Error en Conexion");
-
-if (isset($_POST['nombre']) && isset($_POST['apellido']) && isset($_POST['cuenta']) && isset($_POST['numero']) && isset($_POST['correo']) && isset($_POST['contra'])) {
-
-  $Nombre = get_post($conn, 'nombre');
-  $Apellido = get_post($conn, 'apellido');
-  $NumCuenta = get_post($conn, 'cuenta');
-  $NumTelefono = get_post($conn, 'numero');
-  $Correo = get_post($conn, 'correo');
-  $Contraseña = get_post($conn, 'contra');
-
-  $query = "INSERT INTO usuarios (nombre, apellido, num_cuenta, num_telefono, correo, contrasenia)
-            VALUES" . "('$Nombre','$Apellido','$NumCuenta','$NumTelefono','$Correo','$Contraseña')";
-
-  $result = $conn->query($query);
-  if (!$result) echo "INSERT no se ha realizado<br><br>";
-
-
-  $nom_dir = "$Nombre"."_"."$Apellido"."_"."$NumCuenta";
-  mkdir("Users/"."$nom_dir", 0700);
-  
-  $conn->close();
-
-  function get_post($conn, $var) {
-    return $conn->real_escape_string($_POST[$var]);
-  }
-
-  if (isset($_POST['enviar'])){
-    ?>
-      <script type="text/javascript">
-        window.location = "index.php";
-      </script>
-    <?php
-  }
-}
-?>
