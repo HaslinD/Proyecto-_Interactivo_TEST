@@ -19,7 +19,7 @@
     
     session_start();
     $NombreUsuario = $_SESSION['Nom'];
-    echo "usuario - $NombreUsuario";
+    $NuneroCuenta = $_SESSION['N_Cuenta'];
 
     switch ($_FILES['perfil']['type']) {
 
@@ -68,6 +68,17 @@
     } else {
 
     }
+
+    $query = "SELECT user_ID FROM usuarios WHERE num_cuenta = '$NuneroCuenta' ";
+    $result = $conn->query($query);
+
+    if (!$result) die("Fatal Error");
+
+    $row = $result->fetch_array(MYSQLI_ASSOC);
+
+    $query = "INSERT INTO usuarios (id, foto, banner, nivel_estudio, descripcion, campus, carrera, software, user_ID, post_ID)
+              VALUES" . "('$perfil','$banner','$nivel','$descripcion','$campus','$carrera','software')";
+
 
     $conn->close();
   }
