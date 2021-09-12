@@ -86,7 +86,7 @@
                     if (isset($_POST['enviar'])){
                       ?>
                         <script type="text/javascript">
-                          window.location = "main.html";
+                          window.location = "CrearPerfil.php";
                         </script>
                       <?php
                     }
