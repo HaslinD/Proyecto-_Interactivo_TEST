@@ -12,7 +12,7 @@
     $descripcion = $_POST['descripcion'];
     $campus = $_POST['campus'];
     $carrera = $_POST['carrera'];
-    $software = $_POST['Software'];
+    $software = $_POST['software'];
 
     echo "Perfil - $perfil // Banner - $banner // Nivel - $nivel //  
     descripcion - $descripcion // campus - $campus // carrera - $carrera // sofware - $software";
@@ -68,7 +68,7 @@
     } else {
 
     }
-
+/*    
     $query = "SELECT user_ID FROM usuarios WHERE num_cuenta = '$NuneroCuenta' ";
     $result = $conn->query($query);
 
@@ -78,7 +78,7 @@
 
     $query = "INSERT INTO usuarios (id, foto, banner, nivel_estudio, descripcion, campus, carrera, software, user_ID, post_ID)
               VALUES" . "('$perfil','$banner','$nivel','$descripcion','$campus','$carrera','software')";
-
+*/
 
     $conn->close();
   }
@@ -187,8 +187,8 @@
           
                       <label for="Software"><b>Software:</b></label>
                       <br>
-                      <input class="form-check-input" type="checkbox" name="software" id="gridCheck1">
-                        <label class="form-check-label" for="gridCheck1" name="software">
+                      <input type="checkbox" name="software" value="Blender">
+                        <label value="blender">
                         Blender
                         </label>
                       <br><br>
