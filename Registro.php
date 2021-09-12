@@ -27,7 +27,7 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto">  
+        <ul class="navbar-nav ml-auto">
 
         </ul>
 
@@ -58,22 +58,22 @@
             <h1>Nuevo Registro</h1>
             <h6>Para registrarse recuerde que debe ser estudiante activo de UNITEC.</h6>
             <label for="nombre"><b>Nombre</b></label>
-            <input type="text" placeholder="Ingrese nombre" name="nombre" required>
+            <input type="text" placeholder="Ingrese nombre" name="nombre" value="<?php if (isset($_POST['enviar'])){ echo htmlentities($_POST['nombre']); } ?>" required>
 
             <label for="apellido"><b>Apellido</b></label>
-            <input type="text" placeholder="Ingrese apellido" name="apellido" required>
+            <input type="text" placeholder="Ingrese apellido" name="apellido" value="<?php if (isset($_POST['enviar'])){ echo htmlentities($_POST['apellido']); } ?>" required>
 
             <label for="Email"><b>Numero de Cuenta</b></label>
-            <input type="text" placeholder="Ingrese su numero de cuenta" name="cuenta" required>
+            <input type="text" placeholder="Ingrese su numero de cuenta" name="cuenta" value="<?php if (isset($_POST['enviar'])){ echo htmlentities($_POST['cuenta']); } ?>" required>
 
             <label for="Usuario"><b>Numero de Telefono</b></label>
-            <input type="text" placeholder="Ingrese su numero Telefonico" name="numero" required>
+            <input type="text" placeholder="Ingrese su numero Telefonico" name="numero" value="<?php if (isset($_POST['enviar'])){ echo htmlentities($_POST['numero']); } ?>" required>
 
             <label for="Email"><b>Correo electrónico</b></label>
-            <input type="text" placeholder="Ingrese su Email" name="correo" required>
+            <input type="text" placeholder="Ingrese su Email" name="correo" value="<?php if (isset($_POST['enviar'])){ echo htmlentities($_POST['correo']); } ?>" required>
 
             <label for="Contraseña"><b>Contraseña</b></label>
-            <input type="password" placeholder="Ingrese Contraseña" name="contra" required>
+            <input type="password" placeholder="Ingrese Contraseña" name="contra" value="<?php if (isset($_POST['enviar'])){ echo htmlentities($_POST['contra']); } ?>" required>
 
             <button type="submit" name="enviar" value="submit" class="btn">REGISTRARSE</button>
 
@@ -92,19 +92,25 @@
                   $Correo = get_post($conn, 'correo');
                   $Contraseña = get_post($conn, 'contra');
 
-                  $query = "SELECT nombre, apellido, num_cuenta, num_telefono, correo, contrasenia FROM usuarios WHERE correo = '$Correo'";
+                  $query = "SELECT num_cuenta, correo FROM usuarios WHERE correo = '$Correo' ";
                   $result = $conn->query($query);
+                  $query2 = "SELECT num_cuenta, correo FROM usuarios WHERE num_cuenta = '$NumCuenta'";
+                  $result2 = $conn->query($query2);
 
                   if (!$result) die("Fatal Error");
+                  if (!$result2) die("Fatal Error");
 
                   $row = $result->fetch_array(MYSQLI_ASSOC);
+                  $row2 = $result2->fetch_array(MYSQLI_ASSOC);
 
-                  if ($Correo != $row['correo']) {
+                  if ($NumCuenta != $row2['num_cuenta'] && $Correo != $row['correo']) {
                     $query = "INSERT INTO usuarios (nombre, apellido, num_cuenta, num_telefono, correo, contrasenia)
                               VALUES" . "('$Nombre','$Apellido','$NumCuenta','$NumTelefono','$Correo','$Contraseña')";
 
                     $result = $conn->query($query);
+                    $result2 = $conn->query($query2);
                     if (!$result) echo "INSERT no se ha realizado<br><br>";
+                    if (!$result2) echo "INSERT no se ha realizado<br><br>";
 
 
                     $nom_dir = "$Nombre"."_"."$Apellido"."_"."$NumCuenta";
@@ -117,15 +123,29 @@
                         </script>
                       <?php
                     }
+                  } else if ($Correo == $row['correo'] && $NumCuenta == $row2['num_cuenta']) {
+                    ?>
+                      <div class="alert">
+                        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                        <strong>Error!</strong> El numero de cuenta y el correo que ingreso estan en uso.
+                      </div>
+                    <?php
                   } else if($Correo == $row['correo']) {
                     ?>
                       <div class="alert">
-                        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
                         <strong>Error!</strong> El correo electronico que ingreso esta en uso.
                       </div>
                     <?php
+                  } else if($NumCuenta == $row2['num_cuenta']) {
+                    ?>
+                      <div class="alert">
+                        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                        <strong>Error!</strong> El numero de cuenta que ingreso esta en uso.
+                      </div>
+                    <?php
                   }
-                
+
               }
 
               $conn->close();
@@ -138,7 +158,7 @@
               ?>
           </form>
         </div>
-        
+
 
       </div>
     </section>

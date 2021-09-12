@@ -52,7 +52,7 @@
                     <input type="checkbox" checked="checked"/>
                     <div class="control__indicator"></div>
                   </label>
-                  <span class="ml-auto"><a href="#" class="forgot-pass">Olvide mi contraseña</a></span> 
+                  <span class="ml-auto"><a href="CambioContra.php" class="forgot-pass">Olvide mi contraseña</a></span> 
                 </div>
                 
                 <button type="submit" name="enviar" value="submit" class="btn btn-block btn-primary">CONTINUAR</button>
