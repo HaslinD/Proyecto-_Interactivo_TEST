@@ -1,3 +1,63 @@
+<?php
+
+  require_once 'login.php';
+  $conn = new mysqli($hn, $un, $pw, $db);
+  if ($conn->connect_error) die("Error en Conexion");
+
+  if (isset($_POST['enviar'])){
+   
+    $perfil = $_FILES['perfil']['name'];
+    $descripcion = $_POST['descripcion'];
+   
+    session_start();
+    $NombreUsuario = $_SESSION['Nom'];
+    $NumeroCuenta = $_SESSION['N_Cuenta'];
+
+    switch ($_FILES['perfil']['type']) {
+
+      case 'image/jpeg':
+        $ext = 'jpg';
+        break;
+
+      case 'image/png':
+        $ext = 'png';
+        break;
+
+      default:
+        $ext = '';
+        break;
+    }
+
+    if ($ext) {
+      $n  = $NombreUsuario."_Perfil.".$ext;
+      $destdir = '/Users/'.$NumeroCuenta;
+      move_uploaded_file($_FILES['perfil']['tmp_name'], $n);    
+
+    } else {
+
+    }
+    
+    $query2 = "SELECT ID FROM usuarios WHERE num_cuenta = '$NumeroCuenta' ";
+    $result2 = $conn->query($query2);
+
+    if (!$result2) die("Fatal Error");
+
+    $row = $result2->fetch_array(MYSQLI_ASSOC);
+    $u = $row['ID']; 
+
+    $query = "INSERT INTO perfil (foto, banner, nivel_estudio, descripcion, campus, carrera, software, u_ID)
+              VALUES" . "('$perfil','$banner','$nivel','$descripcion','$campus','$carrera','$software', '$u')";
+
+    $result = $conn->query($query);
+    if (!$result) die("Fatal Error");
+
+    $result->close();
+    $result2->close();
+    $conn->close();
+  }
+
+?>
+
 <!doctype html>
 <html>
     <head>
