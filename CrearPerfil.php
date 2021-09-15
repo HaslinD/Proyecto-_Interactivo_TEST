@@ -5,7 +5,7 @@
   if ($conn->connect_error) die("Error en Conexion");
 
   if (isset($_POST['enviar'])){
-   
+
     $perfil = $_FILES['perfil']['name'];
     $banner = $_FILES['banner']['name'];
     $nivel = $_POST['estudio'];
@@ -14,12 +14,15 @@
     $carrera = $_POST['carrera'];
     $software = $_POST['software'];
 
-    echo "Perfil - $perfil // Banner - $banner // Nivel - $nivel //  
-    descripcion - $descripcion // campus - $campus // carrera - $carrera // sofware - $software";
-    
+    /*echo "Perfil - $perfil // Banner - $banner // Nivel - $nivel //
+    descripcion - $descripcion // campus - $campus // carrera - $carrera // sofware - $software";*/
+
     session_start();
     $NombreUsuario = $_SESSION['Nom'];
     $NumeroCuenta = $_SESSION['N_Cuenta'];
+
+    mkdir("Users/".$NumeroCuenta."/Posts", 0700);
+    $destdir = 'Users/'.$NumeroCuenta.'/';
 
     switch ($_FILES['perfil']['type']) {
 
@@ -37,9 +40,9 @@
     }
 
     if ($ext) {
-      $n  = $NombreUsuario."_Perfil.".$ext;
-      $destdir = '/Users/'.$NumeroCuenta;
-      move_uploaded_file($_FILES['perfil']['tmp_name'], $n);    
+
+      $PERFIL  = $NombreUsuario.'_Perfil.'.$ext;
+      move_uploaded_file($_FILES['perfil']['tmp_name'], $destdir.$PERFIL);
 
     } else {
 
@@ -62,30 +65,40 @@
 
     if ($ext) {
 
-      $n  = $NombreUsuario."_Banner.".$ext;
-      move_uploaded_file($_FILES['banner']['tmp_name'], $n);
+      $BANNER  = $NombreUsuario.'_Banner.'.$ext;
+      move_uploaded_file($_FILES['banner']['tmp_name'], $destdir.$BANNER);
 
     } else {
 
     }
-    
+
     $query2 = "SELECT ID FROM usuarios WHERE num_cuenta = '$NumeroCuenta' ";
     $result2 = $conn->query($query2);
 
     if (!$result2) die("Fatal Error");
 
     $row = $result2->fetch_array(MYSQLI_ASSOC);
-    $u = $row['ID']; 
+    $u = $row['ID'];
 
-    $query = "INSERT INTO perfil (foto, banner, nivel_estudio, descripcion, campus, carrera, software, u_ID)
-              VALUES" . "('$perfil','$banner','$nivel','$descripcion','$campus','$carrera','$software', '$u')";
+    /*$query = "INSERT INTO perfil (foto, banner, nivel_estudio, descripcion, campus, carrera, software, user_ID)
+             VALUES" . "('$PERFIL','$BANNER','$nivel','$descripcion','$campus','$carrera','$software', $u)";
+    //echo $query;
 
     $result = $conn->query($query);
     if (!$result) die("Fatal Error");
 
-    $result->close();
+    $result->close();*/
     $result2->close();
     $conn->close();
+
+    /*if (isset($_POST['enviar'])){
+      ?>
+        <script type="text/javascript">
+          window.location = "main.html";
+        </script>
+      <?php
+    }*/
+
   }
 
 ?>
@@ -96,7 +109,7 @@
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    
+
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
         <link href="css/CrearPerfil.css" rel="stylesheet">
@@ -138,7 +151,7 @@
 
         <section id="">
             <div class="card-container">
-               
+
                 <div id="myForm">
                     <form method="post" action="CrearPerfil.php" class="form-container" enctype="multipart/form-data">
 
@@ -159,7 +172,7 @@
                             </label>
                         </div>
                         <br>
-          
+
                       <label for="estudio"><b>Nivel de estudio</b></label>
                       <select name="estudio" class="custom-select">
                         <option selected>Seleccione una opción</option>
@@ -189,7 +202,7 @@
                         <option value="Animación digital y diseño interactivo">Animación digital y diseño interactivo</option>
                       </select>
                       <br><br>
-          
+
                       <label for="Software"><b>Software:</b></label>
                       <br>
                       <input type="checkbox" name="software" value="Blender">
@@ -199,7 +212,7 @@
                       <br><br>
 
                       <button type="submit" name="enviar" value="submit" class="btn">REGISTRARSE</button>
-        
+
                     </form>
                   </div>
             </div>
@@ -220,17 +233,17 @@
                 var uploadFile = $(this);
                 var files = !!this.files ? this.files : [];
                 if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
-        
+
                 if (/^image/.test( files[0].type)){ // only image file
                     var reader = new FileReader(); // instance of the FileReader
                     reader.readAsDataURL(files[0]); // read the local file
-        
+
                     reader.onloadend = function(){ // set image data as background of div
                         //alert(uploadFile.closest(".upimage").find('.imagePreview').length);
                         uploadFile.closest(".imgUp").find('.imagePreview').css("background-image", "url("+this.result+")");
                     }
                 }
-            
+
             });
         });
     </script>
