@@ -80,6 +80,76 @@
                 <span class="tabMenu">
                     <span class="todosTab">
                         
+
+                        <?php
+                        
+                            require_once 'login.php';
+                            $conn = new mysqli($hn, $un, $pw, $db);
+                            if ($conn->connect_error) die("Error en Conexion");
+                            
+                            session_start();
+                            $id = $_SESSION['id'];
+                            $NumeroCuenta = $_SESSION['N_Cuenta'];
+                            $Nombre = $_SESSION['Nom'];
+                            $Apellido = $_SESSION['Apel'];
+
+                            $query3 = "SELECT count(user_ID) AS count FROM post WHERE user_ID != '$id'";
+                            $result3 = $conn->query($query3);
+
+                            if (!$result3) die("Fatal Error");
+
+                            $row2 = $result3->fetch_array(MYSQLI_ASSOC);
+                            $count = $row2['count'];
+
+                            while($count != 0){
+
+                                if($count != $id){
+                                    $query = "SELECT imagen,descripcion,tag FROM post WHERE user_ID == '$count'";
+                                    $result = $conn->query($query);
+
+                                    if (!$result) die("Fatal Error");
+
+                                    $row = $result->fetch_array(MYSQLI_ASSOC);
+                                    $imagen = $row['imagen'];
+                                    $descripcion = $row['descripcion'];
+                                    ?>
+                                        <div class="publicacion">
+                                        <div class="cont-publicacion">
+                                            <div class="infousuario">
+                                            
+                                                <img src="Users/<?php echo $NumeroCuenta;?>/Post/<?php echo $imagen;?>" class="imgSugerencia"><h6><?php echo $Nombre." ".$Apellido; ?></h6><i class="fas fa-flag"></i>
+                                            </div>
+                                            <div class="contenido">
+                                                
+                                            </div>
+                                            <p><?php echo $descripcion;?></p>
+                                            <div class="flex-container iconos">
+                                                <i class="fas fa-comment-dots icono"></i>
+                                                <h1 class="texto-icono">522</h1>
+                                                <div class="emotes">
+                                                    <i class="fas fa-heart"></i>
+                                                    <span class="emotesrow">&#129315; &#128558; &#128546;</span>
+                                                </div>
+                                                <h1 class="texto-icono">5k</h1>
+                                                <div class="col-md-8 col-sm-6"></div>
+                                                <div class="program">
+                                                    <i class="fab fa-adobe"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <?php
+                                        
+
+                                }else{
+
+                                }
+          
+                                $count--;
+                            }
+                            
+                            $conn->close();
+                        ?>
                         <div class="publicacion">
                             <div class="cont-publicacion">
                                 <div class="infousuario">
@@ -92,7 +162,7 @@
                                 <div class="flex-container iconos">
                                     <i class="fas fa-comment-dots icono"></i>
                                     <h1 class="texto-icono">522</h1>
-                                  <div class="emotes">
+                                    <div class="emotes">
                                         <i class="fas fa-heart"></i>
                                         <span class="emotesrow">&#129315; &#128558; &#128546;</span>
                                     </div>
