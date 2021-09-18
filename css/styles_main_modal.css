@@ -1,0 +1,452 @@
+
+
+:root{
+    --SonicS: #707171;
+    --grayX:#b7b7b8;
+    --platinum:#ececec;
+    --lava:#c52126;
+    --bblue:#3b5e94;
+    --verde: #69B451;
+    --turquesa: #348F9E;
+}
+
+
+#contenedor{
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+}
+#columnaizquierda{
+    height: 100vh;
+    width: 25vw;
+    background-color: #FFFF;
+}
+#columnaderecha{
+    height: 100vh;
+    width: 20vw;
+    background-color: #FFFF;
+    text-align: center;
+}
+#columnacentral{
+    height: 100vh;
+    width: 55vw;
+    background-color: #DFDFDF;
+    flex-direction: column;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+#espacioseguro{
+    /*width: 100vw;*/
+    height: 10vh;
+    background-color: #DFDFDF;
+}
+.publicacion{
+    /*width: 60vw;*/
+    min-height: 40vh;
+    margin-bottom: 50px;
+}
+#menuizquierda{
+    /*width: 100vw;*/
+    height: 75vh;
+    /*background-color: mediumpurple;*/
+    margin-top: 50px;
+    text-align: center;
+}
+#menuderecha{
+    /*width: 100vw;*/
+    height: 75vh;
+    /*background-color: mediumpurple;*/
+    margin-top: 50px;
+    color: #707070;
+}
+.cont-publicacion{
+    width: 42vw;
+    height: 74vh;
+    background-color: white;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    border-radius: 20px;
+    border-style: solid;
+    border-color: #707070;
+    border-width: 1px;
+
+}
+/*Michelle*/
+.imgUsuario{
+    height:80px;
+    width: 80px;
+    margin-top: -4vh;
+    margin-right: -1.6vw;
+    border-radius: 100%;
+}
+#menuizqopciones{
+    color: white;
+}
+.botonizq{
+    background-color: #3B5F93;
+    border-radius: 8px;
+    padding: 10px 15px;
+    font-weight: bold;
+    font-size: 17.62px;
+    line-height: 8vh;
+    box-shadow: 0 3.5px 9px rgb(0 0 0 / 0.6);
+}
+.fa-plus{
+    border-radius: 100%;
+    border-style: solid;
+    border-width: 2px;
+    padding: 3px;
+    margin-right: 8px;
+}
+.imgSugerencia{
+    border-radius: 100%;
+    width: 3vw;
+}
+#mdspersonas .botonder{
+    background-color: #3B5F93;
+    border-radius: 5px;
+    padding: 4px 23px;
+    color: white;
+    font-weight: bold;
+    font-size: 14.6px;
+    box-shadow: 0 3.5px 9px rgb(0 0 0 / 0.6);
+}
+.logoMain{
+    height: 50px;
+    width: 230px;
+}
+
+.fa-pen{
+    margin-top: 16vh;
+    border-radius: 100%;
+    color: white;
+    background-color: #707070;
+    padding: 6px;
+    font-size: 15px;
+}
+.nombre{
+    font-size: 20px;
+    font-family: Segoe UI;
+    font-weight: bold;
+    color: #707070;
+    margin-top: 20px;
+    margin-bottom: 120px;
+}
+#menudersugerencias h6{
+    font-size: 20px !important; 
+    font-weight: lighter;
+    margin-top: 25px;
+}
+#menudersugerencias{
+    font-family: Segoe UI;
+    font-size: 22.46px;
+}
+.contenido{
+    image-rendering: auto;
+    text-align: center;
+    height: 53vh;
+    background-repeat: no-repeat;
+    background-size:100% 100%;
+    background-image: url("../images/Haslin.png");
+}
+.iconos{
+    font-size: 30px;
+    color: #B7B7B8;
+    padding: 0px 25px;
+}
+.emotes{
+    position: relative;
+    display: inline-block;
+
+}
+.emotes .emotesrow {
+  visibility: hidden;
+  width: 150px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -76.7px;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+}
+
+.emotes:hover .emotesrow {
+  visibility: visible;
+}
+#columnacentral .imgSugerencia{
+    float: left;
+}
+#columnacentral .infousuario h6{
+    font-family: Segoe UI;
+    font-size: 31.35px;
+    color: #707070;
+    font-weight: 350;
+    padding-left: 60px;
+    margin-top: 4px;
+}
+.publicacion p{
+    font-size: 24.8px;
+    font-family: Segoe UI;
+    font-weight: lighter;
+    padding: 0px 25px;
+}
+#menuderbusqueda input{
+    border-radius: 12px;
+    border-style: solid;
+    border-width: thin;
+    padding: 8px 8px 8px 35px;
+    color: #707070;
+    font-weight: normal;
+    font-size: 16px;
+}
+.infousuario{
+    padding: 12px 10px 8px 25px;
+}
+.fa-search{
+    position: absolute;
+    font-size: 25px;
+    margin-top: 8px;
+    margin-left: 6px;
+}
+.fa-comment-dots{
+    margin-right: 5px;
+    float: inherit;
+}
+.iconos h1{
+    font-size: 17.48px;
+    font-weight: lighter;
+}
+
+/*scrollbar*/
+
+ /* width */
+ ::-webkit-scrollbar {
+    width: 18px;
+}
+  
+/* Track */
+::-webkit-scrollbar-track {
+
+}
+  
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: white;
+    border-radius: 50px;
+    border-style: solid;
+    border-width: thin;
+    border-color: #707070;
+}
+  
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+}
+
+/*Notas
+ &#128151; codigo para el emote de corazon*/
+
+ /* modal */
+ .flex-container {
+    display: flex;
+  }
+
+  .flex-column{
+    display: flex;
+    flex-direction: row;
+  }
+
+.contenedor-post-fondo{
+    all: initial;
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 5;
+    justify-content: center;
+    align-items: center;
+}
+
+.contenedor-desactivado{
+    display: none;
+}
+
+.contenedor-post {
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    height: 80%;
+    /*margin-left: 120px;
+    margin-top: 120px;*/
+    position: relative;
+}
+
+.image-post {
+    background-color: white;
+    width: 65%;
+    height: 103%;
+    border-top-left-radius: 5%;
+    border-bottom-left-radius: 5%;
+    position: relative;
+}
+
+.comments-post {
+    background-color: var(--grayX);
+    width: 35%;
+    height: 103%;
+    border-top-right-radius: 5%;
+    border-bottom-right-radius: 5%;
+    border-left: 2px solid var(--SonicS);
+}
+
+#imagenPP1 {
+    border-radius: 100%;
+    box-shadow: rgba(112, 113, 113, 0.7) 3px 3px;
+    margin-right: 25px;
+}
+
+.cont1 {
+    margin-top: 20px;
+    margin-left: 40px;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+.texto1 {
+    margin-top: 10px;
+}
+
+.boton {
+    background-color: #3B5F93;
+    color: white;
+    border-radius: 15px;
+    border-style: solid;
+    width: 250px;
+    height: 60px;
+    font-weight: 500;
+    font-size: 15px;
+    text-decoration: none;
+}
+
+.boton1 {
+    justify-self: flex-end;
+    margin-right: 40px;
+}
+
+.imagen-post {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    height: 70%;
+}
+
+#imagenP {
+    width: 100%;
+    height: 100%;
+}
+
+.texto-bottom{
+    align-items: center;
+    width: 100%;
+    margin-bottom: 15px;
+    height: 30%;
+}
+
+.texto-post {
+    border-bottom: 2px solid var(--SonicS);
+    width: 100%;
+}
+
+.texto2 {
+    margin-top: 1%;
+    margin-bottom: 1%;
+    margin-left: 20px;
+}
+
+.iconos-post {
+    padding-top: 1%;
+    padding-right: 1%;
+    padding-left: 30px;
+    width: 100%;
+}
+
+.icono {
+    color: var(--SonicS);
+    font-size: 25px;
+}
+
+.icono-comment {
+    color: var(--SonicS);
+    font-size: 25px;
+    margin-right: 25px;
+    margin-top: 5px;
+}
+
+.texto-icono {
+    margin-left: 7px;
+    margin-right: 10px;
+}
+
+.lista {
+    display: flex;
+    flex-direction: column;
+    height: 92%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: 100%;
+    border-bottom: 2px solid var(--SonicS);
+}
+
+.comment {
+    padding-left: 30px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    min-width: 130px;
+    max-width: 670px;
+    display: flex;
+    align-items: center;
+    color: #09090A;
+    border-radius: 5px;
+    border-bottom: 1px solid var(--SonicS);
+}
+
+.lista-new-comment {
+    background-color: white;
+    height: 8%;
+    border-bottom-right-radius: 5%;
+}
+
+.texto-comentario {
+    padding-left: 50px;
+    padding-top: 17px;
+    color: var(--SonicS);
+}
+
+.imagenP2 {
+    border-radius: 100%;
+    box-shadow: rgba(112, 113, 113, 0.7) 3px 3px;
+    margin-bottom: 35px;
+    margin-right: 15px;
+}
+
+.comment-dots {
+    margin-right: 40px;
+}
+
+.invisible {
+    display: none !important;
+}
+
+.derecha {
+    margin-left: auto !important;
+}

@@ -5,12 +5,12 @@
 }
 #columnaizquierda{
     height: 100vh;
-    width: 25vw;
+    width: 21vw;
     background-color: #FFFF;
 }
 #columnaderecha{
     height: 100vh;
-    width: 20vw;
+    width: 24vw;
     background-color: #FFFF;
     text-align: center;
 }
@@ -24,13 +24,19 @@
 }
 #espacioseguro{
     /*width: 100vw;*/
-    height: 10vh;
+    height: 6vh;
     background-color: #DFDFDF;
+    font-family: Segoe UI;
+    font-size: 20px;
+    color: #707070;
+    text-align: right;
+    padding: 10px 93px 0px 10px;
 }
 .publicacion{
     /*width: 60vw;*/
     min-height: 40vh;
     margin-bottom: 50px;
+    content: contain;
 }
 #menuizquierda{
     /*width: 100vw;*/
@@ -48,7 +54,7 @@
 }
 .cont-publicacion{
     width: 42vw;
-    height: 74vh;
+    /*height: 71.5vh;*/
     background-color: white;
     flex-direction: column;
     margin-left: auto;
@@ -58,27 +64,33 @@
     border-style: solid;
     border-color: #707070;
     border-width: 1px;
-
+    padding: 10px 0px;
 }
-/*Michelle*/
+/*-----------MAIN PAGE------------*/
 .imgUsuario{
     height:80px;
     width: 80px;
-    margin-top: -4vh;
+    margin-top: -5vh;
     margin-right: -1.6vw;
     border-radius: 100%;
+    object-fit: contain;
 }
 #menuizqopciones{
     color: white;
 }
 .botonizq{
+    color: white;
     background-color: #3B5F93;
     border-radius: 8px;
     padding: 10px 15px;
     font-weight: bold;
-    font-size: 17.62px;
-    line-height: 8vh;
+    font-size: 16px;
+    line-height: 6.8vh;
     box-shadow: 0 3.5px 9px rgb(0 0 0 / 0.6);
+}
+.botonizq:hover{
+    background-color: #4f78b2;
+    cursor: pointer;
 }
 .fa-plus{
     border-radius: 100%;
@@ -89,16 +101,19 @@
 }
 .imgSugerencia{
     border-radius: 100%;
-    width: 3vw;
+    width: 40px;
 }
-#mdspersonas .botonder{
+#menudersugerencias .botonder{
     background-color: #3B5F93;
     border-radius: 5px;
-    padding: 4px 23px;
+    padding: 3px 22px;
     color: white;
-    font-weight: bold;
-    font-size: 14.6px;
+    font-size: 16px;
     box-shadow: 0 3.5px 9px rgb(0 0 0 / 0.6);
+    float: right;
+    margin-right: 35px;
+    line-height: 28px;
+    margin-top: 1.3vh;
 }
 .logoMain{
     height: 50px;
@@ -106,7 +121,7 @@
 }
 
 .fa-pen{
-    margin-top: 16vh;
+    margin-top: 10vh;
     border-radius: 100%;
     color: white;
     background-color: #707070;
@@ -119,26 +134,39 @@
     font-weight: bold;
     color: #707070;
     margin-top: 20px;
-    margin-bottom: 120px;
+    margin-bottom: 40px;
 }
 #menudersugerencias h6{
     font-size: 20px !important; 
     font-weight: lighter;
-    margin-top: 25px;
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 #menudersugerencias{
     font-family: Segoe UI;
-    font-size: 22.46px;
+    font-size: 18px;
 }
 .contenido{
     image-rendering: auto;
     text-align: center;
     height: 53vh;
+    background-repeat: no-repeat;
+    background-size:100% 100%;
+    background-image: url("../images/Haslin.png");
+    background-size: cover;
+}
+.flex-container {
+    display: flex;
+    align-content: center;
 }
 .iconos{
+    margin-top: -10px;
     font-size: 30px;
     color: #B7B7B8;
     padding: 0px 25px;
+    border-top-width: thin;
+    border-top-color: #B7B7B8;
+    border-top-style: solid;
 }
 .emotes{
     position: relative;
@@ -170,55 +198,85 @@
 }
 #columnacentral h6{
     font-family: Segoe UI;
-    font-size: 31.35px;
+    font-size: 25px;
     color: #707070;
     font-weight: 350;
     padding-left: 60px;
     margin-top: 4px;
 }
 .publicacion p{
-    font-size: 24.8px;
+    font-size: 19px;
     font-family: Segoe UI;
     font-weight: lighter;
-    padding: 0px 25px;
+    padding: 6px 18px 0px 18px;
 }
 #menuderbusqueda input{
-    border-radius: 12px;
+    border-radius: 18px;
     border-style: solid;
     border-width: thin;
-    padding: 8px 8px 8px 35px;
+    padding: 5px 10px 5px 35px;
     color: #707070;
     font-weight: normal;
     font-size: 16px;
 }
 .infousuario{
-    padding: 12px 10px 8px 25px;
+    padding: 0px 10px 10px 25px;
 }
+
 .fa-search{
     position: absolute;
-    font-size: 25px;
-    margin-top: 8px;
+    font-size: 22px;
+    margin-top: 16px;
     margin-left: 6px;
 }
 .fa-comment-dots{
-    margin-right: 30px;
-    float: inherit;
+    margin-top: 7px;
+}
+.fa-heart{
 }
 .iconos h1{
-    font-size: 17.48px;
+    font-size: 12px;
     font-weight: lighter;
+    text-align: left;
+    margin-top: 15px;
+    margin-left: -15px;
+    margin-right: 20px;
 }
+.fa-flag{
+    float: right;
+    margin-top: -35px;
+    margin-right: 20px;
+    font-size: 25px;
+    color: #9A9A9A;
+}
+.mdstags, .mdspersonas{
+    text-align: left;
+    margin-left: 20px;
+    line-height: 5.5vh;
+}
+.fa-sign-out-alt{
+    color: #707070;
+    font-size: 28px;
+    margin-top: 12vh;
+    margin-left: 40px;
+}
+
+.program{
+    float: right;
+}
+
+
 
 /*scrollbar*/
 
  /* width */
  ::-webkit-scrollbar {
-    width: 18px;
+    width: 17px;
 }
   
 /* Track */
 ::-webkit-scrollbar-track {
-
+    width: 34px;
 }
   
 /* Handle */
@@ -236,3 +294,697 @@
 
 /*Notas
  &#128151; codigo para el emote de corazon*/
+
+#ventanaSalir{
+    display: none;
+    justify-content: center;
+}
+.contenidoSalir{
+    background-color: white;
+    height: 25vh;
+    width: 40vw;
+    border-radius: 20px;
+    border-style: solid;
+    border-color: #707070;
+    border-width: thin;
+    margin-top: 100px;
+}
+.contenidoSalir h4{
+    padding: 70px 10px;
+    text-align: center;
+    font-family: Segoe UI;
+    font-size: 25px;
+    color: #707070;
+    border-bottom: solid;
+    border-bottom-width: thin;
+    border-bottom-color: #707070;
+}
+.opcionesSalir{
+    margin-top: 21.6px;
+}
+.botonSi{
+    padding: 22.2px 130px;
+    background-color: #3B5E94;
+    font-size: 18px;
+    font-family: Segoe UI;
+    font-weight: bold;
+    color: white;
+    border-bottom-left-radius: 18px;
+    border-bottom-width: thin;
+    border-bottom-color: #707070;
+}
+.botonNo{
+    padding: 22.2px 130px;    
+    font-size: 18px;
+    font-family: Segoe UI;
+    font-weight: bold;
+    color: #707070;
+}
+.botonSi:hover{
+    color: white;
+    font-style: normal;
+}
+.botonNo:hover{
+    color: #707070;
+    font-style: normal;
+}
+
+.todos{
+    font-weight: bold;
+    margin-right: 30px;
+}
+.siguiendo{
+    font-weight: normal;
+}
+
+
+ /*---------------STYLE POP UP NUEVA PUBLICACION--------------*/
+#ventanaPublicar{
+  display: flex;
+  justify-content: center;
+
+}
+
+
+.content{
+  background-color: #ececec;
+  width: 900px;
+  border-radius: 20px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #707171;
+  /*
+  margin-left: 80px;
+  margin-top: 220px;
+  */
+}
+
+.borde{
+  border-bottom: solid;
+  border-color: #707171;
+  border-width: 2px;
+}
+
+.btn-blue{
+    background-color: #3b5e94;
+    color: #fff;
+    padding: 10px 15px;
+    border-width: 0;
+    min-width: 150px;
+    font-weight: 600;
+    border-radius: 8px;
+    box-shadow: 0 3.5px 9px rgb(0 0 0 / 0.6);
+}
+
+.btn-blue:hover{
+    background-color: #4f78b2;
+}
+
+.btn-red{
+  background-color: #c52126;
+  color: #fff;
+  padding: 10px 15px;
+  border-width: 0;
+  min-width: 150px;
+  font-weight: 600;
+    border-radius: 8px;
+    box-shadow: 0 3.5px 9px rgb(0 0 0 / 0.6);
+}
+
+.btn-red:hover{
+    background-color: #dd4e52;
+}
+
+h1{
+  font-weight: 400;
+  font-size: 28px;
+  padding-left: 20px;
+}
+
+h2{
+  font-size: 48px;
+  text-align: center;
+      margin-top: 60px;
+    margin-bottom: 10px;
+}
+
+.agregarArchivo{
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+  height: 300px;
+    max-height: 300px;
+}
+
+.agregarArchivo p{
+  text-align: center;
+  margin-top: 20px;
+    margin-bottom: 30px;
+    font-size: 18px;
+}
+
+.seleccionarArchivo{
+  display: flex;
+  justify-content: center;
+}
+
+.publicarCancelar{
+  display: flex;
+    justify-content: flex-end;
+}
+
+.publicarCancelar input{
+  margin: 20px 25px;
+ 
+}
+
+.descripcionInput{
+      display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0px 20px;
+}
+
+.descripcionInput input{
+  width: 100%;
+    background-color: #ececec;
+    border-width: 0;
+    padding: 0 10px;
+}
+
+.descripcionInput i{
+  font-size: 28px;
+    color: #707171;
+}
+
+::placeholder{
+ color: #707171 ;
+ font-size: 18px;
+}
+
+.fa-laugh{
+    padding: 20px 0 0 0;
+}
+
+/* PRIMER INTENTO
+#ventanaPublicar .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s
+}
+
+.popup #ventanaPublicar{
+    visibility: hidden;
+}
+
+*/
+
+.modal{
+    background-color: rgba(0,0,0,0.4);
+    padding-top: 100px;
+}
+
+.imgPublicar{
+    height: 120px;
+    margin-left: 30px;
+}
+
+.fa-plus-circle{
+    font-size: 50px;
+    padding: 35px 80px;
+    color: #707171;
+}    
+
+.agregarArchivo .container{
+    display: inline-flex;
+
+}
+
+.seleccionarArchivo{
+    margin-left: 30px;
+    height: 120px;
+    background-color: #c7c7c7;
+    border-color: #717171;
+}
+ /*---------------FIN STYLE POP UP NUEVA PUBLICACION--------------*/
+
+ /*----------------Perfil---------------------------*/
+ .perfilmain{
+    min-height: 60vh;
+    margin-bottom: 3px;
+}
+.cont-perfil{
+    border-radius: 30px;
+    /*width: 50vw;*/
+    height: 60vh;
+}
+.perfilbanner{
+    width: 50vw;
+    height: 16vh;
+    flex-direction: column;
+    margin-top: -32px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+#profban{
+    margin-top: 5px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 15px;
+}
+.perfildetalles{
+    margin-top: 10px;
+    width: 48vw;
+    height: 11vh;
+    flex-direction: row;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+.perfilfoto{
+    width: 10vh;
+    height: 10vh;
+    float: left;
+}
+#profpic{
+    width: 95%;
+    height: 95%;
+    border-radius: 100px;
+    object-fit: cover;
+    margin: auto auto auto auto;
+    display: block;
+}
+.perfilnombre{
+    width: 8vw;
+    float: left;
+    font-family: "Arial";
+    font-size: 20px;
+    padding-left: 8px;
+}
+.perfilpublicaciones{
+    color: #707070;
+    margin-top: 10px;
+    width: 8vw;
+    font-family: "Arial";
+    float: left;
+    font-size: 18px;
+    padding: 2px;
+}
+.perfilseguidores{
+    color: #707070;
+    margin-top: 10px;
+    width: 8vw;
+    font-family: "Arial";
+    float: left;
+    font-size: 18px;
+    padding: 2px;
+}
+.perfilseguidos{
+    color: #707070;
+    margin-top: 10px;
+    width: 8vw;
+    font-family: "Arial";
+    float: left;
+    font-size: 18px;
+    padding: 2px;
+}
+.perfilbio{
+    color: #707070;
+    width: 35vw;
+    display: block;
+    text-align: left;
+    line-height: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+#perfilposts{
+    display: flex;
+}
+#perfilposts .cont-publicacion{
+    width: 22vw;
+    height: 40vh;
+}
+#perfilposts .left{
+    margin-left: 3.5vw;
+    margin-right: 2vw;
+}
+#perfilposts .right{
+    margin-left: 2vw;
+    margin-right: 3.5vw;
+}
+#perfilposts .contenido{
+    height: 27vh;
+    background-size: fill;
+    margin-top: 3vh;
+}
+#perfilposts .imgSugerencia{
+ height: 5vh;
+ width: 5vh;
+}
+#perfilposts .publicacion p{
+    font-size: 18px;
+}
+#columnacentral .botonizq{
+    color: white;
+}
+
+/*----------PERFIL-----------*/
+
+/*------EDITAR PERFIL-----*/
+#headerEdit{
+    background-color: gray;
+    border-radius: 20px 20px 0px 0px;
+    height: 60px;
+    font-size: 50px;
+    color: #FFFDF9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#editarImagenes{
+    padding-top: 25px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.ProfilePic{
+    border-radius: 80px;
+    width: 160px;
+    height: 160px;
+    margin-left: 75px;
+    align-content: center;
+}
+
+.ProfileBanner{
+    border-radius: 80px;
+    width: 300px;
+    height: 160px;
+    margin-left: 75px;
+    align-content: center;
+}
+
+#editarInfo{
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#estadoEstudio{
+    border-radius: 25px;
+    width: 50vw;
+    height: 50px;
+}
+#campus{
+    border-radius: 25px;
+    width: 50vw;
+    height: 50px;
+}
+#numCelular{
+    border-radius: 25px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #ccc;
+    width: 47vw;
+    height: 45px;
+    padding: 0px 20px;
+    font-family: Segoe UI;
+    font-weight: normal;
+    font-size: 16px;
+    color: #707070;
+}
+#softwares{
+    border-radius: 25px;
+    width: 50vw;
+    height: 50px;
+}
+input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.BotonGuardar{
+    background-color: #3B5F93;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 17.62px;
+    line-height: 3vh;
+    box-shadow: 0 3.5px 9px rgb(0 0 0 / 0.6);
+    color: white;
+    margin-top: 25px;
+    padding: 4px 23px;
+    border-width: 0px;
+    height: 4.5vh;
+    margin-bottom: -25px;
+    margin-left: 1vh;
+    margin-right: 5vh;
+}
+
+.BotonCancelar{
+    margin-top: 25px;
+    background-color: #3B5F93;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 17.62px;
+    line-height: 3vh;
+    box-shadow: 0 3.5px 9px rgb(0 0 0 / 0.6);
+    color: white;
+    margin-right: 1vw;
+    margin-left: 27vw;
+    padding: 4px 23px;
+    border-width: 0px;
+    height: 4.5vh;
+}
+/*
+.UserTags{
+    position: fixed; left: 400px; top: 750px; 
+    position: center;
+    font-family: Nunito;
+}
+.UserTags2{
+    position: fixed; left: 550px; top: 750px; 
+    font-family: Nunito;
+}
+input[type='checkbox']{
+    width: 15px;
+    height: 15px;
+}
+*/
+.column{
+    float: left;
+    width: 15vw;
+}
+
+.row:after{
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/*                   ---------------------------           */
+.profile-pic {
+    color: transparent;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transition: all 0.3s ease;
+}
+.profile-pic input {
+    display: none;
+}
+.profile-pic img {
+    position: absolute;
+    object-fit: cover;
+    width: 165px;
+    height: 165px;
+    box-shadow: 0 0 10px 0 rgba(255, 255, 255, 0.35);
+    border-radius: 100px;
+    z-index: 0;
+}
+.profile-pic .-label {
+    cursor: pointer;
+    height: 165px;
+    width: 165px;
+}
+.profile-pic:hover .-label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 10000;
+    color: #fafafa;
+    transition: background-color 0.2s ease-in-out;
+    border-radius: 100px;
+    margin-bottom: 0;
+}
+.profile-pic span {
+    display: inline-flex;
+    padding: 0.2em;
+    height: 2em;
+}
+ /*     -------------  */
+.profile-banner {
+    color: transparent;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transition: all 0.3s ease;
+}
+.profile-banner input {
+    display: none;
+}
+.profile-banner img {
+    position: absolute;
+    object-fit: cover;
+    width: 165px;
+    height: 165px;
+    box-shadow: 0 0 10px 0 rgba(255, 255, 255, 0.35);
+    border-radius: 100px;
+    z-index: 0;
+}
+.profile-banner .-labelBanner {
+    cursor: pointer;
+    height: 165px;
+    width: 165px;
+}
+.profile-banner:hover .-labelBanner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 10000;
+    color: #fafafa;
+    transition: background-color 0.2s ease-in-out;
+    border-radius: 100px;
+    margin-bottom: 0;
+}
+.profile-banner span {
+    display: inline-flex;
+    padding: 0.2em;
+    height: 2em;
+}
+
+
+.nuevoAlto{
+    background-color: white !important;
+    height: 2vh !important;
+}
+
+#opcionesedit input{
+    font-size: 16.7px;
+    font-family: Segoe UI;
+    font-weight: lighter;
+}
+
+.cont-perfil{
+    color: #707070;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: Segoe UI;
+    font-weight: lighter;
+    font-size: 17px;
+}
+.editarPerfil{
+    border-radius: 20px;
+    height: 90vh !important;
+    align-content: center;
+}
+
+select, option{
+    font-family: Segoe UI;
+    font-weight: normal;
+    font-size: 16px;
+}
+select{
+    color: #707070;
+}
+
+#opcionesEdit{
+    width: 50vw;
+}
+
+/* Hide the browser's default checkbox */
+.checkcontenedor input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.checkcontenedor:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+.checkcontenedor {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* When the checkbox is checked, add a blue background */
+.checkcontenedor input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.checkcontenedor input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.checkcontenedor .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.UserTags{
+    font-family: Segoe UI;
+    font-size: 16px;
+    font-weight: lighter;
+}
