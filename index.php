@@ -66,7 +66,7 @@
                   $usuario =  $_POST['user'];
                   $contraseña =  $_POST['pass'];
 
-                  $query = "SELECT nombre, apellido, num_cuenta, num_telefono, correo, contrasenia FROM usuarios WHERE correo = '$usuario' && contrasenia = '$contraseña' ";
+                  $query = "SELECT ID, nombre, apellido, num_cuenta, num_telefono, correo, contrasenia FROM usuarios WHERE correo = '$usuario' && contrasenia = '$contraseña' ";
                   $result = $conn->query($query);
 
                   if (!$result) die("Fatal Error");
@@ -76,6 +76,7 @@
                   if (($usuario != "" && $contraseña != "") && (($usuario == $row['correo']) && ($contraseña == $row['contrasenia']))) {
 
                     session_start();
+                    $_SESSION['id'] = $row['ID'];
                     $_SESSION['Nom'] = $row['nombre'];
                     $_SESSION['Apel'] = $row['apellido'];
                     $_SESSION['N_Cuenta'] = $row['num_cuenta'];

@@ -1,105 +1,125 @@
 <?php
 
-  require_once 'login.php';
-  $conn = new mysqli($hn, $un, $pw, $db);
-  if ($conn->connect_error) die("Error en Conexion");
-
-  if (isset($_POST['enviar'])){
-
-    $perfil = $_FILES['perfil']['name'];
-    $banner = $_FILES['banner']['name'];
-    $nivel = $_POST['estudio'];
-    $descripcion = $_POST['descripcion'];
-    $campus = $_POST['campus'];
-    $carrera = $_POST['carrera'];
-    $software = $_POST['software'];
-
-    /*echo "Perfil - $perfil // Banner - $banner // Nivel - $nivel //
-    descripcion - $descripcion // campus - $campus // carrera - $carrera // sofware - $software";*/
+    require_once 'login.php';
+    $conn = new mysqli($hn, $un, $pw, $db);
+    if ($conn->connect_error) die("Error en Conexion");
 
     session_start();
-    $NombreUsuario = $_SESSION['Nom'];
-    $NumeroCuenta = $_SESSION['N_Cuenta'];
+    $query3 = "SELECT user_ID FROM perfil";
+    $result3 = $conn->query($query3);
 
-    mkdir("Users/".$NumeroCuenta."/Posts", 0700);
-    $destdir = 'Users/'.$NumeroCuenta.'/';
+    if (!$result3) die("Fatal Error");
 
-    switch ($_FILES['perfil']['type']) {
+    $row2 = $result3->fetch_array(MYSQLI_ASSOC);
+    $u2 = $row2['user_ID'];
+    $id = $_SESSION['id'];
 
-      case 'image/jpeg':
-        $ext = 'jpg';
-        break;
 
-      case 'image/png':
-        $ext = 'png';
-        break;
+    if ($id != $u2) {
+      if (isset($_POST['enviar'])){
 
-      default:
-        $ext = '';
-        break;
-    }
+        $perfil = $_FILES['perfil']['name'];
+        $banner = $_FILES['banner']['name'];
+        $nivel = $_POST['estudio'];
+        $descripcion = $_POST['descripcion'];
+        $campus = $_POST['campus'];
+        $carrera = $_POST['carrera'];
+        $software = $_POST['software'];
 
-    if ($ext) {
+        /*echo "Perfil - $perfil // Banner - $banner // Nivel - $nivel //
+        descripcion - $descripcion // campus - $campus // carrera - $carrera // sofware - $software";*/
 
-      $PERFIL  = $NombreUsuario.'_Perfil.'.$ext;
-      move_uploaded_file($_FILES['perfil']['tmp_name'], $destdir.$PERFIL);
+        $NombreUsuario = $_SESSION['Nom'];
+        $NumeroCuenta = $_SESSION['N_Cuenta'];
 
+        mkdir("Users/".$NumeroCuenta."/Posts", 0700);
+        $destdir = 'Users/'.$NumeroCuenta.'/';
+
+        switch ($_FILES['perfil']['type']) {
+
+          case 'image/jpeg':
+            $ext = 'jpg';
+            break;
+
+          case 'image/png':
+            $ext = 'png';
+            break;
+
+          default:
+            $ext = '';
+            break;
+        }
+
+        if ($ext) {
+
+          $PERFIL  = $NombreUsuario.'_Perfil.'.$ext;
+          move_uploaded_file($_FILES['perfil']['tmp_name'], $destdir.$PERFIL);
+
+        } else {
+
+        }
+
+        switch ($_FILES['banner']['type']) {
+
+          case 'image/jpeg':
+            $ext = 'jpg';
+            break;
+
+          case 'image/png':
+            $ext = 'png';
+            break;
+
+          default:
+            $ext = '';
+            break;
+        }
+
+        if ($ext) {
+
+          $BANNER  = $NombreUsuario.'_Banner.'.$ext;
+          move_uploaded_file($_FILES['banner']['tmp_name'], $destdir.$BANNER);
+
+        } else {
+
+        }
+
+        $query2 = "SELECT ID FROM usuarios WHERE num_cuenta = '$NumeroCuenta' ";
+        $result2 = $conn->query($query2);
+
+        if (!$result2) die("Fatal Error");
+
+        $row = $result2->fetch_array(MYSQLI_ASSOC);
+        $u = $row['ID'];
+
+        $query = "INSERT INTO perfil (foto, banner, nivel_estudio, descripcion, campus, carrera, software, user_ID)
+                 VALUES" . "('$PERFIL','$BANNER','$nivel','$descripcion','$campus','$carrera','$software', $u)";
+        //echo $query;
+
+        $result = $conn->query($query);
+        if (!$result) die("Fatal Error");
+
+        if (isset($_POST['enviar'])){
+            ?>
+                <script type="text/javascript">
+                window.location = "main.html";
+                </script>
+            <?php
+        }
+
+        $result->close();
+        $result2->close();
+        $result3->close();
+        $conn->close();
+
+      }
     } else {
-
+        echo "Error perro";
+        ?>
+            <script type="text/javascript">
+              window.location = "main.html";
+            </script>
+        <?php
     }
-
-    switch ($_FILES['banner']['type']) {
-
-      case 'image/jpeg':
-        $ext = 'jpg';
-        break;
-
-      case 'image/png':
-        $ext = 'png';
-        break;
-
-      default:
-        $ext = '';
-        break;
-    }
-
-    if ($ext) {
-
-      $BANNER  = $NombreUsuario.'_Banner.'.$ext;
-      move_uploaded_file($_FILES['banner']['tmp_name'], $destdir.$BANNER);
-
-    } else {
-
-    }
-
-    $query2 = "SELECT ID FROM usuarios WHERE num_cuenta = '$NumeroCuenta' ";
-    $result2 = $conn->query($query2);
-
-    if (!$result2) die("Fatal Error");
-
-    $row = $result2->fetch_array(MYSQLI_ASSOC);
-    $u = $row['ID'];
-
-    /*$query = "INSERT INTO perfil (foto, banner, nivel_estudio, descripcion, campus, carrera, software, user_ID)
-             VALUES" . "('$PERFIL','$BANNER','$nivel','$descripcion','$campus','$carrera','$software', $u)";
-    //echo $query;
-
-    $result = $conn->query($query);
-    if (!$result) die("Fatal Error");
-
-    $result->close();*/
-    $result2->close();
-    $conn->close();
-
-    /*if (isset($_POST['enviar'])){
-      ?>
-        <script type="text/javascript">
-          window.location = "main.html";
-        </script>
-      <?php
-    }*/
-
-  }
 
 ?>
 

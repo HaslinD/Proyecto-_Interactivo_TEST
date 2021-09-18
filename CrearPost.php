@@ -4,56 +4,73 @@
   $conn = new mysqli($hn, $un, $pw, $db);
   if ($conn->connect_error) die("Error en Conexion");
 
-  if (isset($_POST['enviar'])){
+  if (isset($_POST['descripcion']) && isset($_POST['tag']) && $_FILES){
    
     $perfil = $_FILES['perfil']['name'];
-    $descripcion = $_POST['descripcion'];
+    $descripcion = get_post($conn, 'descripcion');
+    $tag = get_post($conn, 'tag');
    
-    session_start();
-    $NombreUsuario = $_SESSION['Nom'];
-    $NumeroCuenta = $_SESSION['N_Cuenta'];
+    if ($perfil != "" || $descripcion != "") {
+        session_start();
+        $NombreUsuario = $_SESSION['Nom'];
+        $NumeroCuenta = $_SESSION['N_Cuenta'];
+        $id = $_SESSION['id'];
+        $date = date('Y-m-d H:i:s');
 
-    switch ($_FILES['perfil']['type']) {
+        $query3 = "SELECT count(user_ID) AS count FROM post WHERE user_ID = '$id'";
+        $result3 = $conn->query($query3);
 
-      case 'image/jpeg':
-        $ext = 'jpg';
-        break;
+        if (!$result3) die("Fatal Error");
 
-      case 'image/png':
-        $ext = 'png';
-        break;
+        $row2 = $result3->fetch_array(MYSQLI_ASSOC);
 
-      default:
-        $ext = '';
-        break;
-    }
+        $count = $row2['count'];
 
-    if ($ext) {
-      $n  = $NombreUsuario."_Perfil.".$ext;
-      $destdir = '/Users/'.$NumeroCuenta;
-      move_uploaded_file($_FILES['perfil']['tmp_name'], $n);    
+        switch ($_FILES['perfil']['type']) {
 
+          case 'image/jpeg':
+            $ext = 'jpg';
+            break;
+
+          case 'image/png':
+            $ext = 'png';
+            break;
+
+          default:
+            $ext = '';
+            break;
+        }
+
+        if ($ext) {
+          $n  = $count.$ext;
+          $destdir = 'Users/'.$NumeroCuenta.'/Posts/';
+          move_uploaded_file($_FILES['perfil']['tmp_name'], $destdir.$n);    
+
+        } else {
+
+        }
+        
+        $query2 = "SELECT ID FROM usuarios WHERE num_cuenta = '$NumeroCuenta' ";
+        $result2 = $conn->query($query2);
+
+        if (!$result2) die("Fatal Error");
+
+        $row = $result2->fetch_array(MYSQLI_ASSOC);
+        $u = $row['ID']; 
+
+        $query = "INSERT INTO post (imagen, descripcion, tag, fecha, user_ID)
+                  VALUES" . "('$perfil','$descripcion','$tag','$date', $u)";
+
+        $result = $conn->query($query);
+        if (!$result) die("Fatal Error");
+
+        $result->close();
+        $result2->close();
+        $conn->close();
     } else {
-
+        echo "Error perro";
     }
-    
-    $query2 = "SELECT ID FROM usuarios WHERE num_cuenta = '$NumeroCuenta' ";
-    $result2 = $conn->query($query2);
 
-    if (!$result2) die("Fatal Error");
-
-    $row = $result2->fetch_array(MYSQLI_ASSOC);
-    $u = $row['ID']; 
-
-    $query = "INSERT INTO perfil (foto, banner, nivel_estudio, descripcion, campus, carrera, software, u_ID)
-              VALUES" . "('$perfil','$banner','$nivel','$descripcion','$campus','$carrera','$software', '$u')";
-
-    $result = $conn->query($query);
-    if (!$result) die("Fatal Error");
-
-    $result->close();
-    $result2->close();
-    $conn->close();
   }
 
 ?>
@@ -117,7 +134,14 @@
                     <article class="col-md-6">
                         <label for="descripcion"><b>Descripción del post</b></label>
                         <textarea name="descripcion" rows="5" cols="30"></textarea>
-                        <button type="submit" name="enviar" value="submit" class="btn btn-dark">Listo</button>
+                        <label for="Tag"><b>Tag:</b></label>
+                        <br>
+                        <input type="checkbox" name="tag" value="Blender">
+                        <label value="blender">
+                            Blender
+                        </label>
+                        <br><br>
+                        <button type="submit" name="enviar" value="submit" class="btn">Listo</button>
                     </article>
                 </div>
             </div>
