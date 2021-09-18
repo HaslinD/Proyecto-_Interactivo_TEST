@@ -8,8 +8,6 @@
     $descripcion = $_POST['descripcion'];
     $tag = $_POST['tag'];
 
-    echo $perfil.$descripcion.$tag;
-
     if ($perfil != "" || $descripcion != "") {
         session_start();
         $NombreUsuario = $_SESSION['Nom'];
@@ -23,7 +21,7 @@
         if (!$result3) die("Fatal Error");
 
         $row2 = $result3->fetch_array(MYSQLI_ASSOC);
-        $count = $row2['count'];
+        $count = $row2['count'] + 1;
 
         switch ($_FILES['perfil']['type']) {
 
@@ -62,6 +60,14 @@
         $result = $conn->query($query);
         if (!$result) die("Fatal Error");
 
+        if (isset($_POST['enviar'])){
+            ?>
+                <script type="text/javascript">
+                window.location = "main.html";
+                </script>
+            <?php
+        }
+        
         $result->close();
         $result2->close();
         $conn->close();

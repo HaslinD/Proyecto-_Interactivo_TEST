@@ -5,15 +5,18 @@
     if ($conn->connect_error) die("Error en Conexion");
 
     session_start();
-    $query3 = "SELECT user_ID FROM perfil";
+    $id = $_SESSION['id'];
+    $query3 = "SELECT user_ID FROM perfil WHERE user_ID = '$id'";
     $result3 = $conn->query($query3);
 
     if (!$result3) die("Fatal Error");
 
     $row2 = $result3->fetch_array(MYSQLI_ASSOC);
     $u2 = $row2['user_ID'];
-    $id = $_SESSION['id'];
 
+    echo $u2;
+    echo ' , ';
+    echo $id;
 
     if ($id != $u2) {
       if (isset($_POST['enviar'])){
