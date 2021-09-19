@@ -14,10 +14,6 @@
     $row2 = $result3->fetch_array(MYSQLI_ASSOC);
     $u2 = $row2['user_ID'];
 
-    echo $u2;
-    echo ' , ';
-    echo $id;
-
     if ($id != $u2) {
       if (isset($_POST['enviar'])){
 
@@ -104,7 +100,7 @@
         if (isset($_POST['enviar'])){
             ?>
                 <script type="text/javascript">
-                window.location = "main.html";
+                window.location = "main.php";
                 </script>
             <?php
         }
@@ -116,10 +112,9 @@
 
       }
     } else {
-        echo "Error perro";
         ?>
             <script type="text/javascript">
-              window.location = "main.html";
+              window.location = "main.php";
             </script>
         <?php
     }

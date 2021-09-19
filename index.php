@@ -12,15 +12,15 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    
+
     <!-- Style -->
     <link rel="stylesheet" href="css/style.css">
 
     <title>RedSocial</title>
   </head>
-  
+
   <body>
-  
+
     <div class="content">
       <div class="container">
         <div class="row no-gutters">
@@ -44,17 +44,17 @@
                 <div class="form-group last mb-4">
                   <label for="password">Contraseña</label>
                   <input type="password" class="form-control" id="password" name="pass">
-                  
+
                 </div>
-                
+
                 <div class="d-flex mb-5 align-items-center">
                   <label class="control control--checkbox mb-0"><span class="caption">Recuerdame</span>
                     <input type="checkbox" checked="checked"/>
                     <div class="control__indicator"></div>
                   </label>
-                  <span class="ml-auto"><a href="CambioContra.php" class="forgot-pass">Olvide mi contraseña</a></span> 
+                  <span class="ml-auto"><a href="CambioContra.php" class="forgot-pass">Olvide mi contraseña</a></span>
                 </div>
-                
+
                 <button type="submit" name="enviar" value="submit" class="btn btn-block btn-primary">CONTINUAR</button>
 
                 <?php
@@ -95,14 +95,14 @@
                   } else if($usuario == "" || $contraseña == "") {
                     ?>
                       <div class="alert">
-                        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
                         <strong>Error!</strong> Correo o contraseña no ingresada.
                       </div>
                     <?php
                   } else if(($usuario != $row['correo']) && ($contraseña != $row['contrasenia'])) {
                     ?>
                       <div class="alert">
-                        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
                         <strong>Error!</strong> Correo o contraseña incorrecta.
                       </div>
                     <?php
@@ -115,26 +115,26 @@
                 }
                 ?>
 
-                <div class="d-flex mb-5 align-items-center"> 
-                  <span class="ml-left"><a href="Registro.php" class="forgot-pass">Crear una cuenta</a></span>  
+                <div class="d-flex mb-5 align-items-center">
+                  <span class="ml-left"><a href="Registro.php" class="forgot-pass">Crear una cuenta</a></span>
                   <span class="ml-auto" ><a href="Registro.php" class="forgot-pass">Ingresar como invitado</a></span>
                 </div>
-                
+
                 </form>
               </div>
             </div>
-            
+
           </div>
-          
+
         </div>
       </div>
     </div>
 
-  
+
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/main.js"></script>
   </body>
-  
+
 </html>

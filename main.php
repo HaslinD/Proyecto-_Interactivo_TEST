@@ -1,3 +1,24 @@
+<?php
+  require_once 'login.php';
+  $conn = new mysqli($hn, $un, $pw, $db);
+  if ($conn->connect_error) die("Error en Conexion");
+
+  session_start();
+  $id = $_SESSION['id'];
+  $NumeroCuenta = $_SESSION['N_Cuenta'];
+
+  $query4 = "SELECT foto, user_ID FROM perfil WHERE user_ID = '$id'";
+  $result4 = $conn->query($query4);
+
+  if (!$result4) die("Fatal Error");
+  $row3 = $result4->fetch_array(MYSQLI_ASSOC);
+
+  $fotoU = $row3['foto'];
+  $uID = $row3['user_ID'];
+
+  $fileSRC = "Users/".$NumeroCuenta."/".$fotoU;
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,26 +36,26 @@
         <div id="columnaizquierda">
             <div id="menuizquierda">
                 <div id="menuizquni">
-                    <a href="main.html"><img src="images/Logo_UNITEC.png" class="logoMain"></a>
+                    <a href="main.php"><img src="images/Logo_UNITEC.png" class="logoMain"></a>
                 </div>
                 <div id="menuizqperfil">
-                    <img src="images/baba.jpg" class="imgUsuario"> <i class="fas fa-pen"></i><br>
-                    <h1 class="nombre">Linda Donaire</h1>
+                    <img src="<?php echo $fileSRC;?>" class="imgUsuario"> <i class="fas fa-pen"></i><br>
+                    <h1 class="nombre"><?php echo $Nombre." ".$Apellido;?></h1>
                 </div>
                 <div id="menuizqopciones">
                     <a href="perfil.html" class="botonizq">VER PERFIL</a><br>
-                    <a class="botonizq" id="publicacionBTN"><i class="fas fa-plus"></i>NUEVA PUBLICACIÓN</a>
+                    <a class="botonizq" href="CrearPost.php" id="publicacionBTN"><i class="fas fa-plus"></i>NUEVA PUBLICACIÓN</a>
                 </div>
             </div>
 
             <a href="#" onclick="botonSalir()"><i class="fas fa-sign-out-alt"></i></a>
         </div>
-
+        <!--Pop up de botonSalir -->
         <div id="ventanaSalir" class="modal" style="display: none;">
             <div class="contenidoSalir">
                 <h4>¿Estás seguro que quieres cerrar sesión?</h4>
                 <div class="opcionesSalir">
-                    <a href="index.html" class="botonSi">SI</a><a onclick="botonSalir()" href="#" class="botonNo">NO</a>
+                    <a href="index.php" class="botonSi">SI</a><a onclick="botonSalir()" href="#" class="botonNo">NO</a>
                 </div>
             </div>
         </div>
@@ -44,20 +65,18 @@
                 <div class="content">
                     <div class="container">
                         <div class="borde">
-                            <h1>Nueva Publicación</h1>
+                            <h1><a href="CrearPost.php">Nueva Publicación</a></h1>
                         </div>
                         <div class="agregarArchivo borde">
-                            
-                                
-                                      <img class="imgPublicar" src="images/ejemplo1.png" alt="placeholder">
-                                
-                                
+
+                                    <img class="imgPublicar" src="images/ejemplo1.png" alt="placeholder">
+
                                     <img class="imgPublicar" src="images/ejemplo2.png" alt="placeholder">
-                               
-                                <button class="seleccionarArchivo"> 
+
+                                <button class="seleccionarArchivo">
                                     <i class="fas fa-plus-circle"></i>
                                 </button>
-                           
+
                         </div>
                         <div class="borde descripcionInput">
                             <input type="text" name="Descripción" placeholder="Descripción..."> <p><i class="fas fa-laugh"></i></p>
@@ -76,116 +95,78 @@
             <div id="espacioseguro">
                 <a class="todos">Todos</a> <a class="siguiendo">Siguiendo</a>
             </div>
-
                 <span class="tabMenu">
                     <span class="todosTab">
-                        
 
                         <?php
-                        
-                            require_once 'login.php';
-                            $conn = new mysqli($hn, $un, $pw, $db);
-                            if ($conn->connect_error) die("Error en Conexion");
-                            
-                            session_start();
-                            $id = $_SESSION['id'];
-                            $NumeroCuenta = $_SESSION['N_Cuenta'];
-                            $Nombre = $_SESSION['Nom'];
-                            $Apellido = $_SESSION['Apel'];
+                            //Agarrar Informacion de Tabla Post
+                            $query = "SELECT imagen,descripcion,tag,user_ID FROM post";
+                            $result = $conn->query($query);
+                            if (!$result) die("Fatal Error");
 
-                            $query3 = "SELECT count(user_ID) AS count FROM post WHERE user_ID != '$id'";
+                            $row1 = $result->fetch_array(MYSQLI_ASSOC);
+                            $uD = $row1['user_ID'];
+                            //Agarrar Imagen de Tabla perfil
+                            $query3 = "SELECT foto FROM perfil";
                             $result3 = $conn->query($query3);
-
                             if (!$result3) die("Fatal Error");
 
-                            $row2 = $result3->fetch_array(MYSQLI_ASSOC);
-                            $count = $row2['count'];
+                            $count = $result->num_rows;
+                            for ($i = 0; $i < $count; $i++) {
+                              $row = $result->fetch_array(MYSQLI_ASSOC);
+                              //Agarrar nombre apellido y numero de cuenta de tabla de usuarios
+                              $query2 = "SELECT nombre, apellido, num_cuenta FROM usuarios WHERE ID = '$uD'";
+                              $result2 = $conn->query($query2);
+                              if (!$result2) die("Fatal Error");
+                              $rowN = $result2->fetch_array(MYSQLI_ASSOC);
 
-                            while($count != 0){
+                              $rowF = $result3->fetch_array(MYSQLI_ASSOC);
+                              $fotoU = $rowF['foto'];
 
-                                if($count != $id){
-                                    $query = "SELECT imagen,descripcion,tag FROM post WHERE user_ID == '$count'";
-                                    $result = $conn->query($query);
+                              $imagen = $row['imagen'];
+                              $descripcion = $row['descripcion'];
+                              $numC = $rowN['num_cuenta'];
 
-                                    if (!$result) die("Fatal Error");
-
-                                    $row = $result->fetch_array(MYSQLI_ASSOC);
-                                    $imagen = $row['imagen'];
-                                    $descripcion = $row['descripcion'];
-                                    ?>
-                                        <div class="publicacion">
-                                        <div class="cont-publicacion">
-                                            <div class="infousuario">
-                                            
-                                                <img src="Users/<?php echo $NumeroCuenta;?>/Post/<?php echo $imagen;?>" class="imgSugerencia"><h6><?php echo $Nombre." ".$Apellido; ?></h6><i class="fas fa-flag"></i>
-                                            </div>
-                                            <div class="contenido">
-                                                
-                                            </div>
-                                            <p><?php echo $descripcion;?></p>
-                                            <div class="flex-container iconos">
-                                                <i class="fas fa-comment-dots icono"></i>
-                                                <h1 class="texto-icono">522</h1>
-                                                <div class="emotes">
-                                                    <i class="fas fa-heart"></i>
-                                                    <span class="emotesrow">&#129315; &#128558; &#128546;</span>
-                                                </div>
-                                                <h1 class="texto-icono">5k</h1>
-                                                <div class="col-md-8 col-sm-6"></div>
-                                                <div class="program">
-                                                    <i class="fab fa-adobe"></i>
-                                                </div>
-                                            </div>
-                                        </div>
+                              $weirdo = "Users/".$NumeroCuenta."/".$fotoU;
+                              ?>
+                                <div class="publicacion">
+                                  <div class="cont-publicacion">
+                                    <div class="infousuario">
+                                        <img src="<?php echo $weirdo;?>" class="imgSugerencia"><h6>Sebastián Avila</h6><i class="fas fa-flag"></i>
                                     </div>
-                                    <?php
-                                        
+                                    <div class="contenido">
 
-                                }else{
+                                        <img src="images/Haslin.png" class="contenidoImg">
 
-                                }
-          
-                                $count--;
+                                    </div>
+                                    <p>Contenido de comentario del publicador.</p>
+                                    <div class="flex-container iconos">
+                                        <i class="fas fa-comment-dots icono"></i>
+                                        <h1 class="texto-icono">522</h1>
+                                      <div class="emotes">
+                                          <i class="fas fa-heart"></i>
+                                          <span class="emotesrow">&#129315; &#128558; &#128546;</span>
+                                      </div>
+                                      <h1 class="texto-icono">5k</h1>
+                                    </div>
+                                  </div>
+                                </div>
+                              <?php
                             }
-                            
-                            $conn->close();
+                          $conn->close();
                         ?>
-                        <div class="publicacion">
-                            <div class="cont-publicacion">
-                                <div class="infousuario">
-                                    <img src="images/baba.jpg" class="imgSugerencia"><h6>Sebastián Avila</h6><i class="fas fa-flag"></i>
-                                </div>
-                                <div class="contenido">
-                                    
-                                </div>
-                                <p>Contenido de comentario del publicador.</p>
-                                <div class="flex-container iconos">
-                                    <i class="fas fa-comment-dots icono"></i>
-                                    <h1 class="texto-icono">522</h1>
-                                    <div class="emotes">
-                                        <i class="fas fa-heart"></i>
-                                        <span class="emotesrow">&#129315; &#128558; &#128546;</span>
-                                    </div>
-                                    <h1 class="texto-icono">5k</h1>
-                                    <div class="col-md-8 col-sm-6"></div>
-                                    <div class="program">
-                                        <i class="fab fa-adobe"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
                     </span>
 
                     <span class="siguiendoTab">
-                        
+
                         <div class="publicacion">
                             <div class="cont-publicacion">
                                 <div class="infousuario">
                                     <img src="images/baba.jpg" class="imgSugerencia"><h6>Sebastián Avila</h6><i class="fas fa-flag"></i>
                                 </div>
                                 <div class="contenido">
-                                    
+
                                 </div>
                                 <p>Contenido de comentario del publicador.</p>
                                 <div class="flex-container iconos">
@@ -204,13 +185,13 @@
 
                 </span>
 
-            
-            
+
+
 
         </div>
         <div id="columnaderecha">
             <div id="menuderecha">
-                
+
                 <div id="menuderbusqueda">
                     <i class="fas fa-search"></i><input id="taskInput" type="text" placeholder="Buscar...">
                 </div>

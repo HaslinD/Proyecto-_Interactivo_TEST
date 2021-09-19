@@ -63,11 +63,11 @@
         if (isset($_POST['enviar'])){
             ?>
                 <script type="text/javascript">
-                window.location = "main.html";
+                window.location = "main.php";
                 </script>
             <?php
         }
-        
+
         $result->close();
         $result2->close();
         $conn->close();
