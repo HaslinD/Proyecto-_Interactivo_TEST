@@ -9,14 +9,14 @@
   $Nombre = $_SESSION['Nom'];
   $Apellido = $_SESSION['Apel'];
 
-  $query4 = "SELECT foto, user_ID FROM perfil WHERE user_ID = '$id'";
-  $result4 = $conn->query($query4);
+  $queryS = "SELECT foto, user_ID FROM perfil WHERE user_ID = '$id'";
+  $resultS = $conn->query($queryS);
 
-  if (!$result4) die("Fatal Error");
-  $row3 = $result4->fetch_array(MYSQLI_ASSOC);
+  if (!$resultS) die("Fatal Error");
+  $rowS = $resultS->fetch_array(MYSQLI_ASSOC);
 
-  $fotoU = $row3['foto'];
-  $uID = $row3['user_ID'];
+  $fotoU = $rowS['foto'];
+  $uID = $rowS['user_ID'];
 
   $fileSRC = "Users/".$NumeroCuenta."/".$fotoU;
 ?>
@@ -72,17 +72,17 @@
                             <h1>Nueva Publicación</h1>
                         </div>
                         <div class="agregarArchivo borde">
-                            
-                                
+
+
                                     <img class="imgPublicar" src="images/ejemplo1.png" alt="placeholder">
-                                
-                                
+
+
                                     <img class="imgPublicar" src="images/ejemplo2.png" alt="placeholder">
-                               
-                                <button class="seleccionarArchivo"> 
+
+                                <button class="seleccionarArchivo">
                                     <i class="fas fa-plus-circle"></i>
                                 </button>
-                           
+
                         </div>
                         <div class="borde descripcionInput">
                             <input type="text" name="Descripción" placeholder="Descripción..."> <p><i class="fas fa-laugh"></i></p>
@@ -105,21 +105,21 @@
                     <span class="todosTab">
 
                         <?php
-                            //Agarrar Informacion de Tabla Post
+                            //Control Contador de Filas en la tabla del la Base de DATOS
                             $queryC = "SELECT imagen,descripcion,tag,user_ID FROM post";
                             $resultC = $conn->query($queryC);
                             if (!$resultC) die("Fatal Error");
 
                             $count = $resultC->num_rows;
                             for ($i = 0; $i < $count; $i++) {
+                              //Control del FOR Loop
                               $row = $resultC->fetch_array(MYSQLI_ASSOC);
-
                               $uD = $row['user_ID'];
+
                               //Agarrar Imagen de Tabla perfil
                               $query3 = "SELECT foto FROM perfil WHERE user_ID = '$uD'";
                               $result3 = $conn->query($query3);
                               if (!$result3) die("Fatal Error");
-
                               $rowF = $result3->fetch_array(MYSQLI_ASSOC);
                               $fotoU = $rowF['foto'];
 
@@ -129,14 +129,16 @@
                               if (!$result2) die("Fatal Error");
                               $rowN = $result2->fetch_array(MYSQLI_ASSOC);
 
+                              //Variables
                               $Nombre2 = $rowN['nombre'];
                               $Apellido2 = $rowN['apellido'];
-
+                              $numC = $rowN['num_cuenta'];
                               $imagen = $row['imagen'];
                               $descripcion = $row['descripcion'];
-                              $numC = $rowN['num_cuenta'];
 
-                              $imgUser = "Users/".$NumeroCuenta."/".$fotoU;
+                              //Direccion de Imagen (IMPORTANTE)
+                              $imgUser = "Users/".$numC."/".$fotoU;
+                              $imgPost = "Users/".$numC."/Posts/".$imagen;
                               ?>
                                 <div class="publicacion">
                                   <div class="cont-publicacion">
@@ -145,10 +147,10 @@
                                     </div>
                                     <div class="contenido">
 
-                                        <img src="images/Haslin.png" class="contenidoImg">
+                                        <img src="<?php echo $imgPost;?>" class="contenidoImg" width="100%" height="100%">
 
                                     </div>
-                                    <p>Contenido de comentario del publicador.</p>
+                                    <p><?php echo $descripcion; ?></p>
                                     <div class="flex-container iconos">
                                         <i class="fas fa-comment-dots icono"></i>
                                         <h1 class="texto-icono">522</h1>
@@ -163,7 +165,7 @@
 
                                             <span class="emotesrow"><i class="fas fa-heart"></i> <i class="fas fa-thumbs-up"></i>&#128562;&#128518;</span>
                                         </div>
-                                        
+
                                         <h1 class="texto-icono">5k</h1>
                                             <div class="program">
                                                 <i class="fab fa-adobe"></i>
@@ -177,49 +179,7 @@
                         ?>
 
                     </span>
-
-                    <span class="siguiendoTab">
-
-                        <div class="publicacion">
-                            <div class="cont-publicacion">
-                                <div class="infousuario">
-                                    <img src="images/baba.jpg" class="imgSugerencia"><h6>Sebastián Avila</h6><i class="fas fa-flag"></i>
-                                </div>
-                                <div class="contenido">
-                                    
-                                    <img src="images/Haslin.png" class="contenidoImg">
-                                    
-                                </div>
-                                <p>Contenido de comentario del publicador.</p>
-                                <div class="flex-container iconos">
-                                    <i class="fas fa-comment-dots icono"></i>
-                                    <h1 class="texto-icono">522</h1>
-                                  <div class="emotes">
-                                    <span class="emotestodos">
-                                        <i class="fas fa-heart"></i>
-                                        <i class="fas fa-thumbs-up sombrathumb"></i>
-                                        <i class="fas fa-thumbs-up"></i>
-                                        <span class="sorpresa">&#128562;</span>
-                                        <span class="emocion">&#128518;</span>
-                                    </span>
-
-                                        <span class="emotesrow"><i class="fas fa-heart"></i> <i class="fas fa-thumbs-up"></i>&#128562;&#128518;</span>
-                                    </div>
-                                    
-                                    <h1 class="texto-icono">5k</h1>
-                                        <div class="program">
-                                            <i class="fab fa-adobe"></i>
-                                        </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </span>
-
                 </span>
-
-
-
 
         </div>
         <div id="columnaderecha">

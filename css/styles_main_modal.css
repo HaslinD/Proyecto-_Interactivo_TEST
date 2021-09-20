@@ -135,7 +135,7 @@
     margin-bottom: 120px;
 }
 #menudersugerencias h6{
-    font-size: 20px !important; 
+    font-size: 20px !important;
     font-weight: lighter;
     margin-top: 25px;
 }
@@ -148,8 +148,6 @@
     text-align: center;
     height: 53vh;
     background-repeat: no-repeat;
-    background-size:100% 100%;
-    background-image: url("../images/Haslin.png");
 }
 .iconos{
     font-size: 30px;
@@ -231,12 +229,12 @@
  ::-webkit-scrollbar {
     width: 18px;
 }
-  
+
 /* Track */
 ::-webkit-scrollbar-track {
 
 }
-  
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
     background: white;
@@ -245,7 +243,7 @@
     border-width: thin;
     border-color: #707070;
 }
-  
+
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
 }

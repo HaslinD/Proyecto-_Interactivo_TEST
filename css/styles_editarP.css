@@ -1,0 +1,271 @@
+#contenedor{
+    display: flex;
+    flex-direction: row;
+}
+#columnaizquierda{
+    height: 100vh;
+    width: 20vw;
+    background-color: white;
+}
+#columnaderecha{
+    height: 100vh;
+    width: 20vw;
+    background-color: white;
+}
+#columnacentral{
+    height: 100vh;
+    width: 60vw;
+    background-color: gray;
+    flex-direction: column;
+}
+#espacioseguro{
+    width: 100vw;
+    height: 10vh;
+    background: #FFFFFF;
+}
+.publicacion{
+    width: 60vw;
+    min-height: 90vh;
+    background-color: #FFFFFF;
+    margin-bottom: 3px;
+}
+#menuizquierda{
+    width: 100vw;
+    height: 75vh;
+    background-color: white;
+    margin-top: 50px;
+}
+#menuderecha{
+    width: 5vw;
+    height: 75vh;
+    background-color: white;
+    margin-top: 50px;
+}
+.cont-publicacion{
+    width: 60vw;
+    height: 80vh;
+    background-color: #E0E0E0;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    border-radius: 0px 0px 20px 20px;
+
+
+}
+
+#headerEdit{
+    background-color: gray;
+    border-radius: 20px 20px 0px 0px;
+    height: 60px;
+    font-size: 50px;
+    color: #FFFDF9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#editarImagenes{
+    padding-top: 25px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.ProfilePic{
+    border-radius: 80px;
+    width: 160px;
+    height: 160px;
+    margin-left: 75px;
+    align-content: center;
+}
+
+.ProfileBanner{
+    border-radius: 80px;
+    width: 300px;
+    height: 160px;
+    margin-left: 75px;
+    align-content: center;
+}
+
+#editarInfo{
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#estadoEstudio{
+    border-radius: 25px;
+    width: 50vw;
+    height: 50px;
+}
+#campus{
+    border-radius: 25px;
+    width: 50vw;
+    height: 50px;
+}
+#numCelular{
+    border-radius: 25px;
+    width: 50vw;
+    height: 50px;
+}
+#softwares{
+    border-radius: 25px;
+    width: 50vw;
+    height: 50px;
+}
+input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.BotonGuardar{
+    background-color: #3B5F93;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 17.62px;
+    line-height: 3vh;
+    box-shadow: 0 3.5px 9px rgb(0 0 0 / 0.6);
+    color: white;
+    margin-top: 25px;
+    padding: 4px 23px;
+
+}
+
+.BotonCancelar{
+    background-color: #3B5F93;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 17.62px;
+    line-height: 3vh;
+    box-shadow: 0 3.5px 9px rgb(0 0 0 / 0.6);
+    color: white;
+    margin-right: 35px;
+    margin-left: 400px;
+    padding: 4px 23px;
+
+}
+
+.UserTags{
+  /*  position: fixed; left: 400px; top: 750px; */
+    position: center;
+    font-family: Nunito;
+}
+.UserTags2{
+   /* position: fixed; left: 550px; top: 750px; */
+    font-family: Nunito;
+}
+input[type='checkbox']{
+    width: 15px;
+    height: 15px;
+}
+
+.column{
+  float: left;
+    width: 25%;
+
+}
+
+.row:after{
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/*                   ---------------------------           */
+.profile-pic {
+    color: transparent;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transition: all 0.3s ease;
+}
+.profile-pic input {
+    display: none;
+}
+.profile-pic img {
+    position: absolute;
+    object-fit: cover;
+    width: 165px;
+    height: 165px;
+    box-shadow: 0 0 10px 0 rgba(255, 255, 255, 0.35);
+    border-radius: 100px;
+    z-index: 0;
+}
+.profile-pic .-label {
+    cursor: pointer;
+    height: 165px;
+    width: 165px;
+}
+.profile-pic:hover .-label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 10000;
+    color: #fafafa;
+    transition: background-color 0.2s ease-in-out;
+    border-radius: 100px;
+    margin-bottom: 0;
+}
+.profile-pic span {
+    display: inline-flex;
+    padding: 0.2em;
+    height: 2em;
+}
+ /*     -------------  */
+.profile-banner {
+    color: transparent;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transition: all 0.3s ease;
+}
+.profile-banner input {
+    display: none;
+}
+.profile-banner img {
+    position: absolute;
+    object-fit: cover;
+    width: 165px;
+    height: 165px;
+    box-shadow: 0 0 10px 0 rgba(255, 255, 255, 0.35);
+    border-radius: 100px;
+    z-index: 0;
+}
+.profile-banner .-labelBanner {
+    cursor: pointer;
+    height: 165px;
+    width: 165px;
+}
+.profile-banner:hover .-labelBanner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 10000;
+    color: #fafafa;
+    transition: background-color 0.2s ease-in-out;
+    border-radius: 100px;
+    margin-bottom: 0;
+}
+.profile-banner span {
+    display: inline-flex;
+    padding: 0.2em;
+    height: 2em;
+}
+
+
+
+
