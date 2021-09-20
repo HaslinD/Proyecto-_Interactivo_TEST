@@ -1,3 +1,18 @@
+
+
+:root{
+    --SonicS: #707171;
+    --grayX:#b7b7b8;
+    --platinum:#ececec;
+    --lava:#c52126;
+    --bblue:#3b5e94;
+    --verde: #69B451;
+    --turquesa: #348F9E;
+}
+
+
+
+
 #contenedor{
     display: flex;
     flex-direction: row;
@@ -111,7 +126,6 @@
     font-size: 16px;
     box-shadow: 0 3.5px 9px rgb(0 0 0 / 0.6);
     float: right;
-    margin-right: 35px;
     line-height: 28px;
     margin-top: 1.3vh;
 }
@@ -146,14 +160,17 @@
     font-family: Segoe UI;
     font-size: 18px;
 }
+
 .contenido{
+    contain: content;
+}
+
+.contenidoImg{
     image-rendering: auto;
     text-align: center;
     height: 53vh;
-    background-repeat: no-repeat;
-    background-size:100% 100%;
-    background-image: url("../images/Haslin.png");
-    background-size: cover;
+    width: 42vw;
+    align-content: center;
 }
 .flex-container {
     display: flex;
@@ -176,18 +193,29 @@
 .emotes .emotesrow {
   visibility: hidden;
   width: 150px;
-  background-color: black;
-  color: #fff;
+  background-color: white;
   text-align: center;
-  border-radius: 6px;
-  padding: 5px 0;
+  border-radius: 20px;
+  border-color: #707070;
+  border-style: solid;
+  border-width: thin;
+  padding: 2px 0;
   bottom: 100%;
   left: 50%;
   margin-left: -76.7px;
+  font-size: 20px;
 
   /* Position the tooltip */
   position: absolute;
   z-index: 1;
+}
+
+.emotesrow .fa-heart{
+    color: #C52126;
+}
+
+.emotesrow .fa-thumbs-up{
+    color: #3B5E94;
 }
 
 .emotes:hover .emotesrow {
@@ -234,12 +262,41 @@
 }
 .fa-heart{
 }
+
+.fa-thumbs-up{
+    color: #3B5E94;
+}
+
+.emotestodos{
+    letter-spacing: -10px;
+}
+.sombrathumb{
+    color: white;
+    letter-spacing: -32px;
+    font-size: 35px;
+}
+.emotestodos .fa-thumbs-up{
+
+}
+
+.emotestodos .sorpresa{
+    background-color: white;
+    border-radius: 100%;
+}
+.emotestodos .emocion{
+    background-color: white;
+    border-radius: 100%;
+    position: relative;
+    z-index: unset;
+
+}
+
 .iconos h1{
     font-size: 12px;
     font-weight: lighter;
     text-align: left;
     margin-top: 15px;
-    margin-left: -15px;
+    margin-left: -10px;
     margin-right: 20px;
 }
 .fa-flag{
@@ -987,4 +1044,203 @@ select{
     font-family: Segoe UI;
     font-size: 16px;
     font-weight: lighter;
+}
+
+
+/*--------MODAL--------*/
+ .flex-container {
+    display: flex;
+  }
+
+  .flex-column{
+    display: flex;
+    flex-direction: row;
+  }
+
+.contenedor-post-fondo{
+    all: initial;
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 5;
+    justify-content: center;
+    align-items: center;
+}
+
+.contenedor-desactivado{
+    display: none;
+}
+
+.contenedor-post {
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    height: 80%;
+    /*margin-left: 120px;
+    margin-top: 120px;*/
+    position: relative;
+}
+
+.image-post {
+    background-color: white;
+    width: 65%;
+    height: 103%;
+    border-top-left-radius: 5%;
+    border-bottom-left-radius: 5%;
+    position: relative;
+}
+
+.comments-post {
+    background-color: var(--grayX);
+    width: 35%;
+    height: 103%;
+    border-top-right-radius: 5%;
+    border-bottom-right-radius: 5%;
+    border-left: 2px solid var(--SonicS);
+}
+
+#imagenPP1 {
+    border-radius: 100%;
+    box-shadow: rgba(112, 113, 113, 0.7) 3px 3px;
+    margin-right: 25px;
+}
+
+.cont1 {
+    margin-top: 20px;
+    margin-left: 40px;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+.texto1 {
+    margin-top: 10px;
+}
+
+.boton {
+    background-color: #3B5F93;
+    color: white;
+    border-radius: 15px;
+    border-style: solid;
+    width: 250px;
+    height: 60px;
+    font-weight: 500;
+    font-size: 15px;
+    text-decoration: none;
+}
+
+.boton1 {
+    justify-self: flex-end;
+    margin-right: 40px;
+}
+
+.imagen-post {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    height: 70%;
+}
+
+#imagenP {
+    width: 100%;
+    height: 100%;
+}
+
+.texto-bottom{
+    align-items: center;
+    width: 100%;
+    margin-bottom: 15px;
+    height: 30%;
+}
+
+.texto-post {
+    border-bottom: 2px solid var(--SonicS);
+    width: 100%;
+}
+
+.texto2 {
+    margin-top: 1%;
+    margin-bottom: 1%;
+    margin-left: 20px;
+}
+
+.iconos-post {
+    padding-top: 1%;
+    padding-right: 1%;
+    padding-left: 30px;
+    width: 100%;
+}
+
+.icono {
+    color: var(--SonicS);
+    font-size: 25px;
+}
+
+.icono-comment {
+    color: var(--SonicS);
+    font-size: 25px;
+    margin-right: 25px;
+    margin-top: 5px;
+}
+
+.texto-icono {
+    margin-left: 7px;
+    margin-right: 10px;
+}
+
+.lista {
+    display: flex;
+    flex-direction: column;
+    height: 92%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: 100%;
+    border-bottom: 2px solid var(--SonicS);
+}
+
+.comment {
+    padding-left: 30px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    min-width: 130px;
+    max-width: 670px;
+    display: flex;
+    align-items: center;
+    color: #09090A;
+    border-radius: 5px;
+    border-bottom: 1px solid var(--SonicS);
+}
+
+.lista-new-comment {
+    background-color: white;
+    height: 8%;
+    border-bottom-right-radius: 5%;
+}
+
+.texto-comentario {
+    padding-left: 50px;
+    padding-top: 17px;
+    color: var(--SonicS);
+}
+
+.imagenP2 {
+    border-radius: 100%;
+    box-shadow: rgba(112, 113, 113, 0.7) 3px 3px;
+    margin-bottom: 35px;
+    margin-right: 15px;
+}
+
+.comment-dots {
+    margin-right: 40px;
+}
+
+.invisible {
+    display: none !important;
+}
+
+.derecha {
+    margin-left: auto !important;
 }
