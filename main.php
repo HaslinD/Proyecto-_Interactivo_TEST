@@ -3,21 +3,25 @@
   $conn = new mysqli($hn, $un, $pw, $db);
   if ($conn->connect_error) die("Error en Conexion");
 
+  //Recuperacion de los valores de sesion
   session_start();
   $id = $_SESSION['id'];
   $NumeroCuenta = $_SESSION['N_Cuenta'];
   $Nombre = $_SESSION['Nom'];
   $Apellido = $_SESSION['Apel'];
 
+  //Validacion de la tabla perfil en base al ID del usuario
   $queryS = "SELECT foto, user_ID FROM perfil WHERE user_ID = '$id'";
   $resultS = $conn->query($queryS);
 
   if (!$resultS) die("Fatal Error");
   $rowS = $resultS->fetch_array(MYSQLI_ASSOC);
 
+  //Recuperacion de las variables de foto y el ID
   $fotoU = $rowS['foto'];
   $uID = $rowS['user_ID'];
 
+  //Link de busqueda a la foto de perfil del usuario
   $fileSRC = "Users/".$NumeroCuenta."/".$fotoU;
 ?>
 
@@ -105,7 +109,7 @@
                     <span class="todosTab">
 
                         <?php
-                            //Control Contador de Filas en la tabla del la Base de DATOS
+                            //Control del Contador de Filas en la tabla del la Base de DATOS
                             $queryC = "SELECT imagen,descripcion,tag,user_ID FROM post";
                             $resultC = $conn->query($queryC);
                             if (!$resultC) die("Fatal Error");

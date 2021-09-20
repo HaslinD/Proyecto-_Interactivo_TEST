@@ -3,6 +3,7 @@
   $conn = new mysqli($hn, $un, $pw, $db);
   if ($conn->connect_error) die("Error en Conexion");
 
+  //Recuperacion de las variables de sesion
   session_start();
   $id = $_SESSION['id'];
   $NumeroCuenta = $_SESSION['N_Cuenta'];
@@ -143,7 +144,7 @@
                           </dl>
                           <div id="perfilposts">
                           <?php
-                              //Control Contador de Filas en la tabla del la Base de DATOS
+                              //Control del Contador de Filas en la tabla del la Base de DATOS
                               $queryC = "SELECT imagen,descripcion,tag,user_ID FROM post WHERE user_ID = '$id'";
                               $resultC = $conn->query($queryC);
                               if (!$resultC) die("Fatal Error");

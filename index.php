@@ -58,14 +58,17 @@
                 <button type="submit" name="enviar" value="submit" class="btn btn-block btn-primary">CONTINUAR</button>
 
                 <?php
+                //Se entra al darle click al boton de Continuar
                 if (isset($_POST['enviar'])) {
                   require_once 'login.php';
                   $conn = new mysqli($hn, $un, $pw, $db);
                   if ($conn->connect_error) die("Error en Conexion");
 
+                  //Obtiene el usuario y la contraseña de los campos ingresados
                   $usuario =  $_POST['user'];
                   $contraseña =  $_POST['pass'];
 
+                  //Obtiene toda la informacion en base al usuario y la contraseña
                   $query = "SELECT ID, nombre, apellido, num_cuenta, num_telefono, correo, contrasenia FROM usuarios WHERE correo = '$usuario' && contrasenia = '$contraseña' ";
                   $result = $conn->query($query);
 
@@ -73,8 +76,10 @@
 
                   $row = $result->fetch_array(MYSQLI_ASSOC);
 
+                  //Validacion que el usuario y la contraseña no esten vacios y que los valores ingresados sean iguales a los guardados en la base de datos
                   if (($usuario != "" && $contraseña != "") && (($usuario == $row['correo']) && ($contraseña == $row['contrasenia']))) {
 
+                    //Guardamos las variables de los campos en variables de sesion
                     session_start();
                     $_SESSION['id'] = $row['ID'];
                     $_SESSION['Nom'] = $row['nombre'];
@@ -84,6 +89,7 @@
                     $_SESSION['Correo'] = $row['correo'];
                     $_SESSION['Contra'] = $row['contrasenia'];
 
+                    //Reedirige al usuario a la creacion de perfil al darle enviar
                     if (isset($_POST['enviar'])){
                       ?>
                         <script type="text/javascript">
@@ -92,6 +98,7 @@
                       <?php
                     }
 
+                  //Si el usuario o la contraseña estan vacios les genera esta alerta
                   } else if($usuario == "" || $contraseña == "") {
                     ?>
                       <div class="alert">
@@ -99,6 +106,7 @@
                         <strong>Error!</strong> Correo o contraseña no ingresada.
                       </div>
                     <?php
+                  //Si el usuario o la contraseña son diferentes a los de la base de datos les genera esta alerta
                   } else if(($usuario != $row['correo']) && ($contraseña != $row['contrasenia'])) {
                     ?>
                       <div class="alert">
@@ -106,10 +114,7 @@
                         <strong>Error!</strong> Correo o contraseña incorrecta.
                       </div>
                     <?php
-                  } else {
-
                   }
-
                   $result->close();
                   $conn->close();
                 }

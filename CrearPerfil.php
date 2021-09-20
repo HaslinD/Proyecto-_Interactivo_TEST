@@ -4,6 +4,7 @@
     $conn = new mysqli($hn, $un, $pw, $db);
     if ($conn->connect_error) die("Error en Conexion");
 
+    //Recuperacion de la informacion de la tabla perfil en base al ID (ID es un valor de sesion)
     session_start();
     $id = $_SESSION['id'];
     $query3 = "SELECT user_ID FROM perfil WHERE user_ID = '$id'";
@@ -14,9 +15,12 @@
     $row2 = $result3->fetch_array(MYSQLI_ASSOC);
     $u2 = $row2['user_ID'];
 
+    //Verifica si el perfil ya existe en el usuario con el que inicio sesion
     if ($id != $u2) {
+      //Cuando el usuario le da click al boton de enviar
       if (isset($_POST['enviar'])){
 
+        //Variables recuperadas de los campos ingresados
         $perfil = $_FILES['perfil']['name'];
         $banner = $_FILES['banner']['name'];
         $nivel = $_POST['estudio'];
@@ -25,15 +29,16 @@
         $carrera = $_POST['carrera'];
         $software = $_POST['software'];
 
-        /*echo "Perfil - $perfil // Banner - $banner // Nivel - $nivel //
-        descripcion - $descripcion // campus - $campus // carrera - $carrera // sofware - $software";*/
-
+        //Variables de sesion
         $NombreUsuario = $_SESSION['Nom'];
         $NumeroCuenta = $_SESSION['N_Cuenta'];
 
+        //Creacion de la carpeta "Posts"
         mkdir("Users/".$NumeroCuenta."/Posts", 0700);
+        //Destino a la carpeta del Usuario
         $destdir = 'Users/'.$NumeroCuenta.'/';
 
+        //Validacion si la imagen es JPG o PNG
         switch ($_FILES['perfil']['type']) {
 
           case 'image/jpeg':
@@ -49,15 +54,14 @@
             break;
         }
 
+        //Agrega la imagen a la carpeta del usuario (perfil)
         if ($ext) {
 
           $PERFIL  = $NombreUsuario.'_Perfil.'.$ext;
           move_uploaded_file($_FILES['perfil']['tmp_name'], $destdir.$PERFIL);
-
-        } else {
-
         }
 
+        //Validacion si la imagen es JPG o PNG
         switch ($_FILES['banner']['type']) {
 
           case 'image/jpeg':
@@ -73,15 +77,15 @@
             break;
         }
 
+        //Agrega la imagen a la carpeta del usuario (banner)
         if ($ext) {
 
           $BANNER  = $NombreUsuario.'_Banner.'.$ext;
           move_uploaded_file($_FILES['banner']['tmp_name'], $destdir.$BANNER);
 
-        } else {
-
         }
 
+        //Validacion en base del numero de cuenta para obtener el ID del usuario (Numero de cuenta es una variable de sesion)
         $query2 = "SELECT ID FROM usuarios WHERE num_cuenta = '$NumeroCuenta' ";
         $result2 = $conn->query($query2);
 
@@ -90,13 +94,14 @@
         $row = $result2->fetch_array(MYSQLI_ASSOC);
         $u = $row['ID'];
 
+        //Inserta a la tabla de perfil
         $query = "INSERT INTO perfil (foto, banner, nivel_estudio, descripcion, campus, carrera, software, user_ID)
                  VALUES" . "('$PERFIL','$BANNER','$nivel','$descripcion','$campus','$carrera','$software', $u)";
-        //echo $query;
 
         $result = $conn->query($query);
         if (!$result) die("Fatal Error");
 
+        //Cuando se le da click al boton de Registrarse
         if (isset($_POST['enviar'])){
             ?>
                 <script type="text/javascript">
@@ -111,6 +116,7 @@
         $conn->close();
 
       }
+    //Si el usuario ya tiene perfil lo redirige a la pantalla principal
     } else {
         ?>
             <script type="text/javascript">

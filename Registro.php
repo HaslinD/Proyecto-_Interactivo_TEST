@@ -83,8 +83,10 @@
               $conn = new mysqli($hn, $un, $pw, $db);
               if ($conn->connect_error) die("Error en Conexion");
 
+              //Verifica que los campos de nombre, apellido, cuenta, numero, correo y contra no esten vacios
               if (isset($_POST['nombre']) && isset($_POST['apellido']) && isset($_POST['cuenta']) && isset($_POST['numero']) && isset($_POST['correo']) && isset($_POST['contra'])) {
 
+                  //Recuperacion de las variables ingresadas en los campos
                   $Nombre = get_post($conn, 'nombre');
                   $Apellido = get_post($conn, 'apellido');
                   $NumCuenta = get_post($conn, 'cuenta');
@@ -92,6 +94,7 @@
                   $Correo = get_post($conn, 'correo');
                   $Contraseña = get_post($conn, 'contra');
 
+                  //Recuperacion del correo y numero de cuenta en base al correo y numero de cuenta (Estan separados por fallas)
                   $query = "SELECT num_cuenta, correo FROM usuarios WHERE correo = '$Correo' ";
                   $result = $conn->query($query);
                   $query2 = "SELECT num_cuenta, correo FROM usuarios WHERE num_cuenta = '$NumCuenta'";
@@ -103,19 +106,20 @@
                   $row = $result->fetch_array(MYSQLI_ASSOC);
                   $row2 = $result2->fetch_array(MYSQLI_ASSOC);
 
+                  //Validacion que el numero de cuenta y el correo no existan en la base de datos
                   if ($NumCuenta != $row2['num_cuenta'] && $Correo != $row['correo']) {
+                    //Insercion a la tabla de usuarios con los campos ingresados
                     $query = "INSERT INTO usuarios (nombre, apellido, num_cuenta, num_telefono, correo, contrasenia)
                               VALUES" . "('$Nombre','$Apellido','$NumCuenta','$NumTelefono','$Correo','$Contraseña')";
 
                     $result = $conn->query($query);
-                    $result2 = $conn->query($query2);
                     if (!$result) echo "INSERT no se ha realizado<br><br>";
-                    if (!$result2) echo "INSERT no se ha realizado<br><br>";
 
-
+                    //Creacion de la carpeta del usuario usando el numero de cuenta
                     $nom_dir = "$NumCuenta";
                     mkdir("Users/"."$nom_dir", 0700);
 
+                    //Al darle click al boton de registrars se redirige al usuario al login
                     if (isset($_POST['enviar'])){
                       ?>
                         <script type="text/javascript">
@@ -123,6 +127,7 @@
                         </script>
                       <?php
                     }
+                  //Valida si el numero de cuenta y el correo ya existen en la base de datos
                   } else if ($Correo == $row['correo'] && $NumCuenta == $row2['num_cuenta']) {
                     ?>
                       <div class="alert">
@@ -130,6 +135,7 @@
                         <strong>Error!</strong> El numero de cuenta y el correo que ingreso estan en uso.
                       </div>
                     <?php
+                  //Valida si el correo ya existe en la base de datos
                   } else if($Correo == $row['correo']) {
                     ?>
                       <div class="alert">
@@ -137,6 +143,7 @@
                         <strong>Error!</strong> El correo electronico que ingreso esta en uso.
                       </div>
                     <?php
+                  //Valida si el numero de cuenta existe en la base de datos
                   } else if($NumCuenta == $row2['num_cuenta']) {
                     ?>
                       <div class="alert">
@@ -150,6 +157,7 @@
 
               $conn->close();
 
+              //Inicia seguridad en la base de datos
               function get_post($conn, $var) {
                 return $conn->real_escape_string($_POST[$var]);
               }

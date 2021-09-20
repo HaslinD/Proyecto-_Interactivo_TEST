@@ -68,6 +68,7 @@
                     <?php
                     require 'Success.php';
                   }
+                  //Alerta si el campo del numero de cuenta y del correo estan vacios
                 } else if($NCuenta == "" || $Correo == "") {
                   ?>
                     <div class="alert">
@@ -75,6 +76,7 @@
                       <strong>Error!</strong> Numero de cuenta o Correo no ingresados.
                     </div>
                   <?php
+                  //Alerta si el numero de cuenta o el correo no son iguales a los de la base de datos
                 } else if(($NCuenta != $row['num_cuenta']) && ($Correo != $row['correo'])) {
                   ?>
                     <div class="alert">
