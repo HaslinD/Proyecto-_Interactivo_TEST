@@ -45,7 +45,7 @@
                     <h1 class="nombre"><?php echo $Nombre." ".$Apellido;?></h1>
                 </div>
                 <div id="menuizqopciones">
-                    <a href="perfil.html" class="botonizq">VER PERFIL</a><br>
+                    <a href="perfil.php" class="botonizq">VER PERFIL</a><br>
                     <a class="botonizq" href="CrearPost.php" id="publicacionBTN"><i class="fas fa-plus"></i>NUEVA PUBLICACIÓN</a>
                 </div>
             </div>

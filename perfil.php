@@ -8,17 +8,31 @@
   $NumeroCuenta = $_SESSION['N_Cuenta'];
   $Nombre = $_SESSION['Nom'];
   $Apellido = $_SESSION['Apel'];
+  $numTel = $_SESSION['N_Tel'];
 
-  $queryS = "SELECT foto, user_ID FROM perfil WHERE user_ID = '$id'";
+  //Obtener foto, banner del usuario
+  $queryS = "SELECT foto, banner, user_ID FROM perfil WHERE user_ID = '$id'";
   $resultS = $conn->query($queryS);
 
   if (!$resultS) die("Fatal Error");
   $rowS = $resultS->fetch_array(MYSQLI_ASSOC);
 
-  $fotoU = $rowS['foto'];
+  //Agarrar nombre apellido y numero de cuenta de tabla de perfil
+  $query2 = "SELECT campus,carrera,software FROM perfil WHERE ID = '$id'";
+  $result2 = $conn->query($query2);
+  if (!$result2) die("Fatal Error");
+  $rowN = $result2->fetch_array(MYSQLI_ASSOC);
+
+  //Variables
+  $campus = $rowN['campus'];
+  $carrera = $rowN['carrera'];
+  $software = $rowN['software'];
+  $fotoPerfil = $rowS['foto'];
+  $fotoBanner = $rowS['banner'];
   $uID = $rowS['user_ID'];
 
-  $fileSRC = "Users/".$NumeroCuenta."/".$fotoU;
+  $fileSRC_Perfil = "Users/".$NumeroCuenta."/".$fotoPerfil;
+  $fileSRC_Banner = "Users/".$NumeroCuenta."/".$fotoBanner;
 ?>
 
 <!DOCTYPE html>
@@ -36,11 +50,11 @@
         <div id="columnaizquierda">
             <div id="menuizquierda">
                 <div id="menuizquni">
-                    <a href="main.html"><img src="images/Logo_UNITEC.png" class="logoMain"></a>
+                    <a href="main.php"><img src="images/Logo_UNITEC.png" class="logoMain"></a>
                 </div>
                 <div id="menuizqperfil">
-                    <img src="images/baba.jpg" class="imgUsuario"> <i class="fas fa-pen"></i><br>
-                    <h1 class="nombre">Linda Donaire</h1>
+                    <img src="<?php echo $fileSRC_Perfil;?>" class="imgUsuario"> <i class="fas fa-pen"></i><br>
+                    <h1 class="nombre"><?php echo $Nombre." ".$Apellido;?></h1>
                 </div>
                 <div id="menuizqopciones">
                     <a href="perfil.html" class="botonizq">VER PERFIL</a><br>
@@ -54,7 +68,7 @@
             <div class="contenidoSalir">
                 <h4>¿Estás seguro que quieres cerrar sesión?</h4>
                 <div class="opcionesSalir">
-                    <a href="index.html" class="botonSi">SI</a><a onclick="botonSalir()" href="#" class="botonNo">NO</a>
+                    <a href="index.php" class="botonSi">SI</a><a onclick="botonSalir()" href="#" class="botonNo">NO</a>
                 </div>
             </div>
         </div>
@@ -97,181 +111,110 @@
             <div class="perfilmain">
                 <div class="cont-perfil">
                     <div class="perfilbanner">
-                        <?php
 
-                            //Agarrar Imagen de Tabla perfil
-                            $query3 = "SELECT foto,banner FROM perfil WHERE user_ID = '$id'";
-                            $result3 = $conn->query($query3);
-                            if (!$result3) die("Fatal Error");
-                            $rowF = $result3->fetch_array(MYSQLI_ASSOC);
-    
-
-                            //Agarrar nombre apellido y numero de cuenta de tabla de perfil
-                            $query2 = "SELECT campus,carrera,software FROM perfil WHERE ID = '$id'";
-                            $result2 = $conn->query($query2);
-                            if (!$result2) die("Fatal Error");
-                            $rowN = $result2->fetch_array(MYSQLI_ASSOC);
-
-                            //Variables
-                            $campus = $rowN['campus'];
-                            $carrera = $rowN['carrera'];
-                            $software = $rowN['software'];
-                            $imagen = $rowF['foto'];
-                            $banner = $rowf['banner'];
-                            
-
-                            //Direccion de Imagen (IMPORTANTE)
-                            $imgPerfil = "Users/".$numC."/".$imagen;
-                            $imgBanner = "Users/".$numC."/".$banner;
-
-                        ?>
-                        <img src="<?php echo $imgPerfi;?>" id="profban">
-                    </div>
-                    <div class="perfildetalles">
-                        <div class="perfilfoto">
-                            <img src="<?php echo $imgBanner;?>" id="profpic">
+                        <img src="<?php echo $fileSRC_Banner;?>" id="profban">
                         </div>
-                        <div class="perfilnombre">
-                            <p class="nombre"><?php echo $Nombre;?></p>
-                        </div>
-                            <a class="perfilpublicaciones">
-                            <span class="publicacionesNum">0</span>
-                            <p>Publicaciones</p>
-                            </a>
-                            <a class="perfilseguidores">
+                        <div class="perfildetalles">
+                            <div class="perfilfoto">
+                                <img src="<?php echo $fileSRC_Perfil;?>" id="profpic">
+                            </div>
+                            <div class="perfilnombre">
+                                <p class="nombre"><?php echo $Nombre." ".$Apellido;?></p>
+                            </div>
+                                <a class="perfilpublicaciones">
                                 <span class="publicacionesNum">0</span>
-                                <p>Seguidores</p>
-                            </a>
-                            <a class="perfilseguidos">
-                                <span class="publicacionesNum">0</span>
-                                <p>Seguidos</p>
-                            </a>
-                    </div>
-                    <dl class="perfilbio">
-                        <dt class="carrera"><?php echo $carrera;?></dt>
-                        <dt>Campus:</dt> <dd class="Campus"><?php echo $campus;?><</dd>
-                        <dt>Número:</dt> <dd class="numero">+504 0000 0000</dd>
-                        <dt>Programas:</dt> <dd class="programas"><?php echo $software;?></dd>
-                        <a href='editarPerfil.html' class="botonizq">Editar</a>
-                    </dl>
-                    <div id="perfilposts">
+                                <p>Publicaciones</p>
+                                </a>
+                                <a class="perfilseguidores">
+                                    <span class="publicacionesNum">0</span>
+                                    <p>Seguidores</p>
+                                </a>
+                                <a class="perfilseguidos">
+                                    <span class="publicacionesNum">0</span>
+                                    <p>Seguidos</p>
+                                </a>
+                          </div>
+                          <dl class="perfilbio">
+                              <dt class="carrera"><?php echo $carrera;?></dt>
+                              <dt>Campus:</dt> <dd class="Campus"><?php echo $campus;?></dd>
+                              <dt>Número:</dt> <dd class="numero">+504 <?php echo $numTela;?></dd>
+                              <dt>Programas:</dt> <dd class="programas"><?php echo $software;?></dd>
+                              <a href='editarPerfil.html' class="botonizq">Editar</a>
+                          </dl>
+                          <div id="perfilposts">
+                          <?php
+                              //Control Contador de Filas en la tabla del la Base de DATOS
+                              $queryC = "SELECT imagen,descripcion,tag,user_ID FROM post WHERE user_ID = '$id'";
+                              $resultC = $conn->query($queryC);
+                              if (!$resultC) die("Fatal Error");
 
+                              $count = $resultC->num_rows;
+                              for ($i = 0; $i < $count; $i++) {
+                                //Control del FOR Loop
+                                $row = $resultC->fetch_array(MYSQLI_ASSOC);
+                                $uD = $row['user_ID'];
 
-                    <?php
-                            //Control Contador de Filas en la tabla del la Base de DATOS
-                            $queryC = "SELECT imagen,descripcion,tag,user_ID FROM post WHERE user_ID = '$id'";
-                            $resultC = $conn->query($queryC);
-                            if (!$resultC) die("Fatal Error");
+                                //Agarrar Imagen de Tabla perfil
+                                $query3 = "SELECT foto FROM perfil WHERE user_ID = '$uD'";
+                                $result3 = $conn->query($query3);
+                                if (!$result3) die("Fatal Error");
+                                $rowF = $result3->fetch_array(MYSQLI_ASSOC);
+                                $fotoU = $rowF['foto'];
 
-                            $count = $resultC->num_rows;
-                            for ($i = 0; $i < $count; $i++) {
-                              //Control del FOR Loop
-                              $row = $resultC->fetch_array(MYSQLI_ASSOC);
-                              $uD = $row['user_ID'];
+                                //Agarrar nombre apellido y numero de cuenta de tabla de usuarios
+                                $query2 = "SELECT nombre, apellido, num_cuenta FROM usuarios WHERE ID = '$uD'";
+                                $result2 = $conn->query($query2);
+                                if (!$result2) die("Fatal Error");
+                                $rowN = $result2->fetch_array(MYSQLI_ASSOC);
 
-                              //Agarrar Imagen de Tabla perfil
-                              $query3 = "SELECT foto FROM perfil WHERE user_ID = '$uD'";
-                              $result3 = $conn->query($query3);
-                              if (!$result3) die("Fatal Error");
-                              $rowF = $result3->fetch_array(MYSQLI_ASSOC);
-                              $fotoU = $rowF['foto'];
+                                //Variables
+                                $Nombre2 = $rowN['nombre'];
+                                $Apellido2 = $rowN['apellido'];
+                                $numC = $rowN['num_cuenta'];
+                                $imagen = $row['imagen'];
+                                $descripcion = $row['descripcion'];
 
-                              //Agarrar nombre apellido y numero de cuenta de tabla de usuarios
-                              $query2 = "SELECT nombre, apellido, num_cuenta FROM usuarios WHERE ID = '$uD'";
-                              $result2 = $conn->query($query2);
-                              if (!$result2) die("Fatal Error");
-                              $rowN = $result2->fetch_array(MYSQLI_ASSOC);
+                                //Direccion de Imagen (IMPORTANTE)
+                                $imgUser = "Users/".$numC."/".$fotoU;
+                                $imgPost = "Users/".$numC."/Posts/".$imagen;
+                                ?>
+                                  <div class="publicacion">
+                                    <div class="cont-publicacion">
+                                      <div class="infousuario">
+                                          <img src="<?php echo $imgUser;?>" class="imgSugerencia"><h6><?php echo $Nombre2.' '.$Apellido2; ?></h6><i class="fas fa-flag"></i>
+                                      </div>
+                                      <div class="contenido">
 
-                              //Variables
-                              $Nombre2 = $rowN['nombre'];
-                              $Apellido2 = $rowN['apellido'];
-                              $numC = $rowN['num_cuenta'];
-                              $imagen = $row['imagen'];
-                              $descripcion = $row['descripcion'];
+                                          <img src="<?php echo $imgPost;?>" class="contenidoImg" width="100%" height="100%">
 
-                              //Direccion de Imagen (IMPORTANTE)
-                              $imgUser = "Users/".$numC."/".$fotoU;
-                              $imgPost = "Users/".$numC."/Posts/".$imagen;
-                              ?>
-                                <div class="publicacion">
-                                  <div class="cont-publicacion">
-                                    <div class="infousuario">
-                                        <img src="<?php echo $imgUser;?>" class="imgSugerencia"><h6><?php echo $Nombre2.' '.$Apellido2; ?></h6><i class="fas fa-flag"></i>
-                                    </div>
-                                    <div class="contenido">
+                                      </div>
+                                      <p><?php echo $descripcion; ?></p>
+                                      <div class="flex-container iconos">
+                                          <i class="fas fa-comment-dots icono"></i>
+                                          <h1 class="texto-icono">522</h1>
+                                        <div class="emotes">
+                                          <span class="emotestodos">
+                                              <i class="fas fa-heart"></i>
+                                              <i class="fas fa-thumbs-up sombrathumb"></i>
+                                              <i class="fas fa-thumbs-up"></i>
+                                              <span class="sorpresa">&#128562;</span>
+                                              <span class="emocion">&#128518;</span>
+                                          </span>
 
-                                        <img src="<?php echo $imgPost;?>" class="contenidoImg" width="100%" height="100%">
+                                              <span class="emotesrow"><i class="fas fa-heart"></i> <i class="fas fa-thumbs-up"></i>&#128562;&#128518;</span>
+                                          </div>
 
-                                    </div>
-                                    <p><?php echo $descripcion; ?></p>
-                                    <div class="flex-container iconos">
-                                        <i class="fas fa-comment-dots icono"></i>
-                                        <h1 class="texto-icono">522</h1>
-                                      <div class="emotes">
-                                        <span class="emotestodos">
-                                            <i class="fas fa-heart"></i>
-                                            <i class="fas fa-thumbs-up sombrathumb"></i>
-                                            <i class="fas fa-thumbs-up"></i>
-                                            <span class="sorpresa">&#128562;</span>
-                                            <span class="emocion">&#128518;</span>
-                                        </span>
-
-                                            <span class="emotesrow"><i class="fas fa-heart"></i> <i class="fas fa-thumbs-up"></i>&#128562;&#128518;</span>
-                                        </div>
-
-                                        <h1 class="texto-icono">5k</h1>
-                                            <div class="program">
-                                                <i class="fab fa-adobe"></i>
-                                            </div>
+                                          <h1 class="texto-icono">5k</h1>
+                                              <div class="program">
+                                                  <i class="fab fa-adobe"></i>
+                                              </div>
+                                      </div>
                                     </div>
                                   </div>
-                                </div>
-                              <?php
-                            }
-                          $conn->close();
-                        ?>
-
-
-                        <div class="publicacion">
-                            <div class="cont-publicacion left">
-                               
-                                <div class="contenido">
-                                    
-                                    <img src="images/Haslin.png" class="contenidoImg">
-                                </div>
-                                <p>Contenido de comentario del publicador.</p>
-                                <div class="flex-container iconos">
-                                    <i class="fas fa-comment-dots icono"></i>
-                                    <h1 class="texto-icono">522</h1>
-                                  <div class="flex-container emotes">
-                                        <i class="fas fa-heart"></i>
-                                        <span class="emotesrow">&#129315; &#128558; &#128546;</span>
-                                    </div>
-                                    <h1 class="texto-icono">5k</h1>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="publicacion">
-                            <div class="cont-publicacion right">
-                               
-                                <div class="contenido">
-                                    
-                                    <img src="images/Haslin.png" class="contenidoImg">
-                                </div>
-                                <p>Contenido de comentario del publicador.</p>
-                                <div class="flex-container iconos">
-                                    <i class="fas fa-comment-dots icono"></i>
-                                    <h1 class="texto-icono">522</h1>
-                                  <div class="flex-container emotes">
-                                        <i class="fas fa-heart"></i>
-                                        <span class="emotesrow">&#129315; &#128558; &#128546;</span>
-                                    </div>
-                                    <h1 class="texto-icono">5k</h1>
-                                </div>
-                            </div>
-                        </div>
-
+                                <?php
+                              }
+                            $conn->close();
+                          ?>
 
                     </div>
                 </div>
@@ -279,7 +222,7 @@
         </div>
         <div id="columnaderecha">
            <div id="menuderecha">
-                
+
                 <div id="menuderbusqueda">
                     <i class="fas fa-search"></i><input id="taskInput" type="text" placeholder="Buscar...">
                 </div>
