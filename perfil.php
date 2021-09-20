@@ -1,3 +1,26 @@
+<?php
+  require_once 'login.php';
+  $conn = new mysqli($hn, $un, $pw, $db);
+  if ($conn->connect_error) die("Error en Conexion");
+
+  session_start();
+  $id = $_SESSION['id'];
+  $NumeroCuenta = $_SESSION['N_Cuenta'];
+  $Nombre = $_SESSION['Nom'];
+  $Apellido = $_SESSION['Apel'];
+
+  $queryS = "SELECT foto, user_ID FROM perfil WHERE user_ID = '$id'";
+  $resultS = $conn->query($queryS);
+
+  if (!$resultS) die("Fatal Error");
+  $rowS = $resultS->fetch_array(MYSQLI_ASSOC);
+
+  $fotoU = $rowS['foto'];
+  $uID = $rowS['user_ID'];
+
+  $fileSRC = "Users/".$NumeroCuenta."/".$fotoU;
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -74,14 +97,42 @@
             <div class="perfilmain">
                 <div class="cont-perfil">
                     <div class="perfilbanner">
-                        <img src="https://www.purina-latam.com/sites/g/files/auxxlc391/files/styles/social_share_large/public/Purina%C2%AE%20La%20llegada%20del%20gatito%20a%20casa.jpg?itok=_3VnSPSl" id="profban">
+                        <?php
+
+                            //Agarrar Imagen de Tabla perfil
+                            $query3 = "SELECT foto,banner FROM perfil WHERE user_ID = '$id'";
+                            $result3 = $conn->query($query3);
+                            if (!$result3) die("Fatal Error");
+                            $rowF = $result3->fetch_array(MYSQLI_ASSOC);
+    
+
+                            //Agarrar nombre apellido y numero de cuenta de tabla de perfil
+                            $query2 = "SELECT campus,carrera,software FROM perfil WHERE ID = '$id'";
+                            $result2 = $conn->query($query2);
+                            if (!$result2) die("Fatal Error");
+                            $rowN = $result2->fetch_array(MYSQLI_ASSOC);
+
+                            //Variables
+                            $campus = $rowN['campus'];
+                            $carrera = $rowN['carrera'];
+                            $software = $rowN['software'];
+                            $imagen = $rowF['foto'];
+                            $banner = $rowf['banner'];
+                            
+
+                            //Direccion de Imagen (IMPORTANTE)
+                            $imgPerfil = "Users/".$numC."/".$imagen;
+                            $imgBanner = "Users/".$numC."/".$banner;
+
+                        ?>
+                        <img src="<?php echo $imgPerfi;?>" id="profban">
                     </div>
                     <div class="perfildetalles">
                         <div class="perfilfoto">
-                            <img src="https://www.purina-latam.com/sites/g/files/auxxlc391/files/styles/social_share_large/public/Purina%C2%AE%20La%20llegada%20del%20gatito%20a%20casa.jpg?itok=_3VnSPSl" id="profpic">
+                            <img src="<?php echo $imgBanner;?>" id="profpic">
                         </div>
                         <div class="perfilnombre">
-                            <p class="nombre">Gatito Minino</p>
+                            <p class="nombre"><?php echo $Nombre;?></p>
                         </div>
                             <a class="perfilpublicaciones">
                             <span class="publicacionesNum">0</span>
@@ -97,13 +148,89 @@
                             </a>
                     </div>
                     <dl class="perfilbio">
-                        <dt class="carrera">Animación Digital y Diseño</dt>
-                        <dt>Campus:</dt> <dd class="Campus">San Pedro Sula</dd>
+                        <dt class="carrera"><?php echo $carrera;?></dt>
+                        <dt>Campus:</dt> <dd class="Campus"><?php echo $campus;?><</dd>
                         <dt>Número:</dt> <dd class="numero">+504 0000 0000</dd>
-                        <dt>Programas:</dt> <dd class="programas">Blender, Photoshop y Adobe After Effects.</dd>
+                        <dt>Programas:</dt> <dd class="programas"><?php echo $software;?></dd>
                         <a href='editarPerfil.html' class="botonizq">Editar</a>
                     </dl>
                     <div id="perfilposts">
+
+
+                    <?php
+                            //Control Contador de Filas en la tabla del la Base de DATOS
+                            $queryC = "SELECT imagen,descripcion,tag,user_ID FROM post WHERE user_ID = '$id'";
+                            $resultC = $conn->query($queryC);
+                            if (!$resultC) die("Fatal Error");
+
+                            $count = $resultC->num_rows;
+                            for ($i = 0; $i < $count; $i++) {
+                              //Control del FOR Loop
+                              $row = $resultC->fetch_array(MYSQLI_ASSOC);
+                              $uD = $row['user_ID'];
+
+                              //Agarrar Imagen de Tabla perfil
+                              $query3 = "SELECT foto FROM perfil WHERE user_ID = '$uD'";
+                              $result3 = $conn->query($query3);
+                              if (!$result3) die("Fatal Error");
+                              $rowF = $result3->fetch_array(MYSQLI_ASSOC);
+                              $fotoU = $rowF['foto'];
+
+                              //Agarrar nombre apellido y numero de cuenta de tabla de usuarios
+                              $query2 = "SELECT nombre, apellido, num_cuenta FROM usuarios WHERE ID = '$uD'";
+                              $result2 = $conn->query($query2);
+                              if (!$result2) die("Fatal Error");
+                              $rowN = $result2->fetch_array(MYSQLI_ASSOC);
+
+                              //Variables
+                              $Nombre2 = $rowN['nombre'];
+                              $Apellido2 = $rowN['apellido'];
+                              $numC = $rowN['num_cuenta'];
+                              $imagen = $row['imagen'];
+                              $descripcion = $row['descripcion'];
+
+                              //Direccion de Imagen (IMPORTANTE)
+                              $imgUser = "Users/".$numC."/".$fotoU;
+                              $imgPost = "Users/".$numC."/Posts/".$imagen;
+                              ?>
+                                <div class="publicacion">
+                                  <div class="cont-publicacion">
+                                    <div class="infousuario">
+                                        <img src="<?php echo $imgUser;?>" class="imgSugerencia"><h6><?php echo $Nombre2.' '.$Apellido2; ?></h6><i class="fas fa-flag"></i>
+                                    </div>
+                                    <div class="contenido">
+
+                                        <img src="<?php echo $imgPost;?>" class="contenidoImg" width="100%" height="100%">
+
+                                    </div>
+                                    <p><?php echo $descripcion; ?></p>
+                                    <div class="flex-container iconos">
+                                        <i class="fas fa-comment-dots icono"></i>
+                                        <h1 class="texto-icono">522</h1>
+                                      <div class="emotes">
+                                        <span class="emotestodos">
+                                            <i class="fas fa-heart"></i>
+                                            <i class="fas fa-thumbs-up sombrathumb"></i>
+                                            <i class="fas fa-thumbs-up"></i>
+                                            <span class="sorpresa">&#128562;</span>
+                                            <span class="emocion">&#128518;</span>
+                                        </span>
+
+                                            <span class="emotesrow"><i class="fas fa-heart"></i> <i class="fas fa-thumbs-up"></i>&#128562;&#128518;</span>
+                                        </div>
+
+                                        <h1 class="texto-icono">5k</h1>
+                                            <div class="program">
+                                                <i class="fab fa-adobe"></i>
+                                            </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              <?php
+                            }
+                          $conn->close();
+                        ?>
+
 
                         <div class="publicacion">
                             <div class="cont-publicacion left">
