@@ -19,7 +19,7 @@
   $rowS = $resultS->fetch_array(MYSQLI_ASSOC);
 
   //Agarrar nombre apellido y numero de cuenta de tabla de perfil
-  $query2 = "SELECT campus,carrera,software FROM perfil WHERE ID = '$id'";
+  $query2 = "SELECT campus,carrera,software FROM perfil WHERE user_ID = '$id'";
   $result2 = $conn->query($query2);
   if (!$result2) die("Fatal Error");
   $rowN = $result2->fetch_array(MYSQLI_ASSOC);
@@ -58,8 +58,8 @@
                     <h1 class="nombre"><?php echo $Nombre." ".$Apellido;?></h1>
                 </div>
                 <div id="menuizqopciones">
-                    <a href="perfil.html" class="botonizq">VER PERFIL</a><br>
-                    <a class="botonizq" id="publicacionBTN"><i class="fas fa-plus"></i>NUEVA PUBLICACIÓN</a>
+                    <a href="perfil.php" class="botonizq">VER PERFIL</a><br>
+                    <a href="CrearPost.php" class="botonizq" id="publicacionBTN"><i class="fas fa-plus"></i>NUEVA PUBLICACIÓN</a>
                 </div>
             </div>
 
@@ -138,7 +138,7 @@
                           <dl class="perfilbio">
                               <dt class="carrera"><?php echo $carrera;?></dt>
                               <dt>Campus:</dt> <dd class="Campus"><?php echo $campus;?></dd>
-                              <dt>Número:</dt> <dd class="numero">+504 <?php echo $numTela;?></dd>
+                              <dt>Número de telefono:</dt> <dd class="Numero">+504 <?php echo $numTel;?></dd>
                               <dt>Programas:</dt> <dd class="programas"><?php echo $software;?></dd>
                               <a href='editarPerfil.html' class="botonizq">Editar</a>
                           </dl>
@@ -186,7 +186,7 @@
                                       </div>
                                       <div class="contenido">
 
-                                          <img src="<?php echo $imgPost;?>" class="contenidoImg" width="100%" height="100%">
+                                          <img src="<?php echo $imgPost;?>" width="100%" height="100%">
 
                                       </div>
                                       <p><?php echo $descripcion; ?></p>

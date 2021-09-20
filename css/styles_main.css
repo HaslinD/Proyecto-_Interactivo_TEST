@@ -165,6 +165,7 @@
     contain: content;
 }
 
+/*Clase para la imagen dentro de un post*/
 .contenidoImg{
     image-rendering: auto;
     text-align: center;
@@ -172,6 +173,7 @@
     width: 42vw;
     align-content: center;
 }
+
 .flex-container {
     display: flex;
     align-content: center;
