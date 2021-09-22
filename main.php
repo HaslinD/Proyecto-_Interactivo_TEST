@@ -56,12 +56,14 @@
 
             <a href="#" onclick="botonSalir()"><i class="fas fa-sign-out-alt"></i></a>
         </div>
-        <!--Pop up de botonSalir -->
+
+         <!--Pop up de botonSalir -->
         <div id="ventanaSalir" class="modal" style="display: none;">
             <div class="contenidoSalir">
                 <h4>¿Estás seguro que quieres cerrar sesión?</h4>
                 <div class="opcionesSalir">
-                    <a href="index.php" class="botonSi">SI</a><a onclick="botonSalir()" href="#" class="botonNo">NO</a>
+                    <a href="index.php" class="botonSi">SI</a>
+                    <a onclick="botonSalir()" href="#" class="botonNo">NO</a>
                 </div>
             </div>
         </div>

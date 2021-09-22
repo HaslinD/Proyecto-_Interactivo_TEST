@@ -354,35 +354,46 @@
 /*Notas
  &#128151; codigo para el emote de corazon*/
 
+
+
+
+
+ /* MODAL LOG OUT */
 #ventanaSalir{
     display: none;
+    align-items: center;
     justify-content: center;
 }
+
 .contenidoSalir{
+    display: flex;
+    flex-direction: column;
     background-color: white;
     height: 25vh;
-    width: 40vw;
     border-radius: 20px;
     border-style: solid;
     border-color: #707070;
     border-width: thin;
-    margin-top: 100px;
+    
 }
 .contenidoSalir h4{
     padding: 70px 10px;
     text-align: center;
     font-family: Segoe UI;
     font-size: 25px;
+    margin-bottom: 0;
     color: #707070;
     border-bottom: solid;
     border-bottom-width: thin;
     border-bottom-color: #707070;
 }
 .opcionesSalir{
-    margin-top: 21.6px;
+    display: flex;
+    height: 100%;
+    width: 100%;
 }
+
 .botonSi{
-    padding: 22.2px 130px;
     background-color: #3B5E94;
     font-size: 18px;
     font-family: Segoe UI;
@@ -391,13 +402,24 @@
     border-bottom-left-radius: 18px;
     border-bottom-width: thin;
     border-bottom-color: #707070;
-}
-.botonNo{
-    padding: 22.2px 130px;    
+    height: 100%;
+    width: inherit;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}   
+.botonNo{   
     font-size: 18px;
     font-family: Segoe UI;
     font-weight: bold;
     color: #707070;
+    height: 100%;
+    width: inherit;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .botonSi:hover{
     color: white;
@@ -407,6 +429,10 @@
     color: #707070;
     font-style: normal;
 }
+ /* MODAL LOG OUT */
+
+
+
 
 .todos{
     font-weight: bold;
@@ -560,7 +586,6 @@ h2{
 
 .modal{
     background-color: rgba(0,0,0,0.4);
-    padding-top: 100px;
 }
 
 .imgPublicar{
