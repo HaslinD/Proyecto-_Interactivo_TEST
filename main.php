@@ -197,23 +197,46 @@
                 <div id="menudersugerencias">
                     <div id="mdspersonas">
                         <h6>SUGERENCIAS PARA TI</h6>
-                        <dl class="mdspersonas">
-                            <dt>
-                                <img src="images/baba.jpg" class="imgSugerencia" alt="sugerencia"> Naima Roig <a class="botonder">SEGUIR</a>
-                            </dt>
-                        </dl>
+                        <div class="row mdspersonas">
+                            <div class="col-6">
+                                <img src="images/baba.jpg" class="imgSugerencia" alt="sugerencia"> Naima Roig
+                            </div>
+                            <div class="col">
+                                <a class="botonder">SEGUIR</a>
+                            </div>
+                        </div>
 
                     </div>
+
                     <div id="mdstags">
                         <h6>EXPLORAR TAGS</h6>
-                        <dl class="mdstags">
-                            <dt> #Modelado3D <a class="botonder">SEGUIR</a></dt>
-                            <dt>#Dibujo <a class="botonder">SEGUIR</a></dt>
-                            <dt>#Animacion2D <a class="botonder">SEGUIR</a></dt>
-                            <dt>#Ilustracion <a class="botonder">SEGUIR</a></dt>
-                        </dl>
-
-                    </div>
+                        <div class="row mdstags">
+                            <div class="col-6">
+                                <div> #Modelado3D</div>
+                            </div>
+                            <div class="col">
+                                <a class="botonder">SEGUIR</a>
+                            </div>
+                            <div class="col-6">
+                                <div>#Dibujo</div>
+                            </div>
+                            <div class="col">
+                                <a class="botonder">SEGUIR</a>
+                            </div>
+                            <div class="col-6">
+                                <div>#Animacion2D </div>
+                            </div> 
+                            <div class="col">
+                                <a class="botonder">SEGUIR</a>
+                            </div>
+                            <div class="col-6">
+                                <div>#Ilustracion </div>
+                            </div>
+                            <div class="col">
+                                <a class="botonder">SEGUIR</a>
+                            </div>
+                        </div>
+                    </div> 
                 </div>
             </div>
         </div>
