@@ -180,8 +180,8 @@
 
                             $row = $resultFL->fetch_array(MYSQLI_ASSOC);
                             $CountFL = $resultFL->num_rows;
-                            if () {
-
+                            if ($CountFL != 0) {
+                                
                             } else {
                               //Control del Contador de Filas en la tabla del la Base de DATOS
                               $queryC = "SELECT * FROM perfil WHERE user_ID != $id";
@@ -193,6 +193,16 @@
                                 //Control del FOR Loop
                                 $row = $resultC->fetch_array(MYSQLI_ASSOC);
                                 $uD = $row['user_ID'];
+
+                                //verificar si existe relación en la tabla
+                                $queryF = "SELECT * FROM follow WHERE userL_ID == $id, userF_ID == $uD";
+                                $resultF = $conn->query($queryFL);
+
+                                if (!$resultF){
+                                    //No encontro relación (imprimir)
+                                }else{
+                                    //Encontro relación (Ño imprimir UwU)
+                                }
 
                                 //Agarrar Imagen de Tabla perfil
                                 $query3 = "SELECT foto FROM perfil WHERE user_ID = '$uD'";
