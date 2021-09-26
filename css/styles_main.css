@@ -36,17 +36,19 @@
     flex-direction: column;
     overflow-x: hidden;
     overflow-y: auto;
+    /*border-radius: 30px 30px 20px 20px;*/
 }
 #espacioseguro{
     /*width: 100vw;*/
-    height: 6vh;
+    height: 7vh;
     background-color: #DFDFDF;
     font-family: Segoe UI;
     font-size: 20px;
     color: #707070;
-    text-align: right;
     padding: 10px 93px 0px 10px;
+    justify-content: right;
 }
+
 .publicacion{
     /*width: 60vw;*/
     min-height: 40vh;
@@ -97,11 +99,11 @@
     color: white;
     background-color: #3B5F93;
     border-radius: 8px;
-    padding: 10px 15px;
+    padding: 6px 13px;
     font-weight: bold;
     font-size: 16px;
-    line-height: 6.8vh;
-    box-shadow: 0 3.5px 9px rgb(0 0 0 / 0.6);
+    box-shadow: 0 3.5px 10px rgb(0 0 0 / 0.5);
+    margin-bottom: 20px;
 }
 .botonizq:hover{
     background-color: #4f78b2;
@@ -125,9 +127,10 @@
     color: white;
     font-size: 16px;
     box-shadow: 0 3.5px 9px rgb(0 0 0 / 0.6);
-    float: right;
-    line-height: 28px;
+    /*float: right;
+    line-height: 28px;*/
     margin-top: 1.3vh;
+    font-weight: bold;
 }
 .logoMain{
     height: 50px;
@@ -159,21 +162,19 @@
 #menudersugerencias{
     font-family: Segoe UI;
     font-size: 18px;
+    margin-left: 10px;
 }
 
 .contenido{
     contain: content;
 }
 
-/*Clase para la imagen dentro de un post*/
 .contenidoImg{
     image-rendering: auto;
-    text-align: center;
-    height: 53vh;
-    width: 42vw;
     align-content: center;
+    object-fit: cover;
+    width: 100%;
 }
-
 .flex-container {
     display: flex;
     align-content: center;
@@ -234,6 +235,7 @@
     padding-left: 60px;
     margin-top: 4px;
 }
+
 .publicacion p{
     font-size: 19px;
     font-family: Segoe UI;
@@ -244,11 +246,12 @@
     border-radius: 18px;
     border-style: solid;
     border-width: thin;
-    padding: 5px 10px 5px 35px;
+    padding: 5px 8px 5px 33px;
     color: #707070;
     font-weight: normal;
     font-size: 16px;
 }
+
 .infousuario{
     padding: 0px 10px 10px 25px;
 }
@@ -308,10 +311,20 @@
     font-size: 25px;
     color: #9A9A9A;
 }
+
+.mdstags{
+    font-weight: bold;
+}
+
 .mdstags, .mdspersonas{
     text-align: left;
     margin-left: 20px;
-    line-height: 5.5vh;
+    line-height: 4vh;
+}
+.mdspersonas .personas{
+    padding-top: 8px;
+    padding-bottom: 8px;
+    line-height: 2vh;
 }
 .fa-sign-out-alt{
     color: #707070;
@@ -429,10 +442,8 @@
 
 
 
-
 .todos{
     font-weight: bold;
-    margin-right: 30px;
 }
 .siguiendo{
     font-weight: normal;
@@ -447,7 +458,7 @@
 }
 
 
-.content{
+#ventanaPublicar .content{
   background-color: #ececec;
   width: 900px;
   border-radius: 20px;
@@ -458,6 +469,10 @@
   margin-left: 80px;
   margin-top: 220px;
   */
+}
+
+#ventanaPublicar .container{
+    width: 900px;
 }
 
 .borde{
@@ -510,11 +525,14 @@ h2{
 }
 
 .agregarArchivo{
-  display: flex;
-  justify-content: center;
   padding: 30px;
   height: 300px;
-    max-height: 300px;
+  max-height: 300px;
+}
+
+.seleccionados{
+     display: flex;
+  justify-content: space-between;
 }
 
 .agregarArchivo p{
@@ -527,6 +545,9 @@ h2{
 .seleccionarArchivo{
   display: flex;
   justify-content: center;
+    height: 120px;
+    background-color: #c7c7c7;
+    border-color: #717171;
 }
 
 .publicarCancelar{
@@ -564,7 +585,7 @@ h2{
 }
 
 .fa-laugh{
-    padding: 20px 0 0 0;
+   
 }
 
 /* PRIMER INTENTO
@@ -582,11 +603,11 @@ h2{
 
 .modal{
     background-color: rgba(0,0,0,0.4);
+    padding-top: 100px;
 }
 
 .imgPublicar{
     height: 120px;
-    margin-left: 30px;
 }
 
 .fa-plus-circle{
@@ -600,12 +621,39 @@ h2{
 
 }
 
-.seleccionarArchivo{
-    margin-left: 30px;
-    height: 120px;
-    background-color: #c7c7c7;
-    border-color: #717171;
+#tituloNuevaPub{
+        display: flex;
+    justify-content: space-between;
+    color: #707171;
+    padding-top: 5px;
 }
+
+.xCerrar{
+color: #707171;
+    font-size: 24px;
+}
+
+.xCerrar:hover{
+    cursor: pointer;
+    color: #4e4e4e;
+}
+
+#myModal .smile{
+     font-size: 25px;
+}
+
+#myModal .emotes{
+    padding-top: 10px;
+}
+
+#myModal .emotes:hover{
+    cursor: pointers;
+}
+
+input[type=text], select {
+    border: 0 !important;
+}
+
  /*---------------FIN STYLE POP UP NUEVA PUBLICACION--------------*/
 
  /*----------------Perfil---------------------------*/
@@ -700,7 +748,7 @@ h2{
     margin-right: auto;
 }
 #perfilposts{
-    display: flex;
+    display: flow;
 }
 #perfilposts .cont-publicacion{
     width: 22vw;
@@ -728,6 +776,11 @@ h2{
 }
 #columnacentral .botonizq{
     color: white;
+}
+.profilepost{
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
 }
 
 /*----------PERFIL-----------*/
@@ -871,6 +924,17 @@ input[type='checkbox']{
     clear: both;
 }
 
+/* Quita las arros del number text field */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+
 /*                   ---------------------------           */
 .profile-pic {
     color: transparent;
@@ -979,7 +1043,7 @@ input[type='checkbox']{
     font-size: 17px;
 }
 .editarPerfil{
-    border-radius: 20px;
+
     height: 90vh !important;
     align-content: center;
 }
@@ -1071,14 +1135,14 @@ select{
 
 
 /*--------MODAL--------*/
- .flex-container {
+.flex-container {
     display: flex;
-  }
+}
 
-  .flex-column{
+.flex-column{
     display: flex;
     flex-direction: row;
-  }
+}
 
 .contenedor-post-fondo{
     all: initial;
@@ -1266,4 +1330,66 @@ select{
 
 .derecha {
     margin-left: auto !important;
+}
+
+/*--------SEGUIDORES--------*/
+.seguidores-contenedor{
+    overflow: hidden;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+    background-color: #DFDFDF;
+    border: thin solid #9A9A9A;
+    margin-top: 30px;
+}
+.seguir{
+    border-radius: 8px;
+    background-color: #3B5F93;
+    border-style: none;
+    color: #FFFFFF;
+    width: 106px;
+    font-weight: bold;
+    -webkit-box-shadow: 0px 3px 15px #3B3B3B;
+    box-shadow: 0px 3px 15px #3B3B3B;
+}
+button .remover {display: none;}
+button:hover .seguir-t {display: none;}
+button:hover .remover {display: inline;}
+	
+.perfiles-contenedor{
+    padding-top: 14px;
+}
+.perfiles{
+    text-align: center;
+    padding-top: 9px;
+}
+.perfiles img{
+    width: 30px;
+    height: auto;
+    border-radius: 20px;
+}
+.perfiles p{
+    display: inline-block;
+    padding-left: 5px;
+    padding-right: 178px;
+}
+.tab{
+    width: 50%;
+    display: inline-block;
+    background-color: #FFFFFF;
+    text-align: center;
+    height: 40px;
+    padding-bottom: auto;
+    padding-top: 7px;
+    color: #3B5F93;
+}
+.tab:active{
+    background-color: #3B5F93;
+    color: #FFFFFF;	
+}
+
+
+.tabContent {
+    display:none;
 }

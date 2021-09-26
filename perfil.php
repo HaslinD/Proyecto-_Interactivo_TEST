@@ -123,14 +123,14 @@
                                 <p class="nombre"><?php echo $Nombre." ".$Apellido;?></p>
                             </div>
                                 <a class="perfilpublicaciones">
-                                <span class="publicacionesNum">0</span>
-                                <p>Publicaciones</p>
+                                    <span class="publicacionesNum">0</span>
+                                    <p>Publicaciones</p>
                                 </a>
-                                <a class="perfilseguidores">
+                                <a class="perfilseguidores" href="seguidores.php">
                                     <span class="publicacionesNum">0</span>
                                     <p>Seguidores</p>
                                 </a>
-                                <a class="perfilseguidos">
+                                <a class="perfilseguidos" href="seguidores.php">
                                     <span class="publicacionesNum">0</span>
                                     <p>Seguidos</p>
                                 </a>
