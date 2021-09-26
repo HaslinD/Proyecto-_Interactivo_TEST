@@ -107,7 +107,7 @@
                                 <img class="imgPublicar" src="images/ejemplo2.png" alt="placeholder">
 
                                 <!--BOTON de SELECCIONAR Archivos-->
-                                <button class="seleccionarArchivo"> 
+                                <button class="seleccionarArchivo">
                                         <i class="fas fa-plus-circle"></i>
                                 </button>
                             </div>
@@ -145,98 +145,109 @@
 				<div class="seguidores-contenedor">
 				<div style="text-align: center; background-color:#707070; font-size: 20px; color: white;">Personas</div>
 				<a href="#" class="tab" onclick="showStuff(this);changeColor(this.id);" id="seguidos1">Seguidos</a><a href="#" class="tab" onclick="showStuff(this);changeColor(this.id)" id="seguidos2">Seguidores</a>
-				
+
 				<div class="perfiles-contenedor, tabContent" id="seguidos-1">
 					<div class="perfiles"><img src="images/baba.jpg" width="400" height="400" alt=""/><p>Haslin Avila</p><button class="seguir"><span class="remover">Remover</span><span class="seguir-t">Seguido</span></button>
 				    </div>
 				</div>
 				<div class="perfiles-contenedor, tabContent" id="seguidos-2">
+
 				</div>
 			</div>
 			</div>
 			</div>
-	
+
 
 
         <div id="columnaderecha">
             <div id="menuderecha">
-                <!----Barra de Busqueda---->
+                <!---Barra de Busqueda---->
                 <div id="menuderbusqueda">
                     <i class="fas fa-search"></i><input id="taskInput" type="text" placeholder="Buscar...">
                 </div>
-                <!----Barra de Busqueda---->
+                <!---Barra de Busqueda---->
 
 
                 <div id="menudersugerencias">
-                    <!----Sugerencias de Personas---->
+                    <!---Sugerencias de Personas---->
                     <div id="mdspersonas">
                         <h6>SUGERENCIAS PARA TI</h6>
 
                         <?php
-                            //Control del Contador de Filas en la tabla del la Base de DATOS
-                            $queryC = "SELECT * FROM perfil";
-                            $resultC = $conn->query($queryC);
-                            if (!$resultC) die("Fatal Error");
+                            $queryFL = "SELECT * FROM follow";
+                            $resultFL = $conn->query($queryFL);
+                            if (!$resultFL) die("Fatal Error");
 
-                            $count = $resultC->num_rows;
-                            for ($i = 0; $i < $count; $i++) {
-                              //Control del FOR Loop
-                              $row = $resultC->fetch_array(MYSQLI_ASSOC);
-                              $uD = $row['user_ID'];
+                            $row = $resultFL->fetch_array(MYSQLI_ASSOC);
+                            $CountFL = $resultFL->num_rows;
+                            if () {
 
-                              //Agarrar Imagen de Tabla perfil
-                              $query3 = "SELECT foto FROM perfil WHERE user_ID = '$uD'";
-                              $result3 = $conn->query($query3);
-                              if (!$result3) die("Fatal Error");
-                              $rowF = $result3->fetch_array(MYSQLI_ASSOC);
-                              $fotoU = $rowF['foto'];
+                            } else {
+                              //Control del Contador de Filas en la tabla del la Base de DATOS
+                              $queryC = "SELECT * FROM perfil WHERE user_ID != $id";
+                              $resultC = $conn->query($queryC);
+                              if (!$resultC) die("Fatal Error");
 
-                              //Agarrar nombre apellido y numero de cuenta de tabla de usuarios
-                              $query2 = "SELECT nombre, apellido, num_cuenta FROM usuarios WHERE ID = '$uD'";
-                              $result2 = $conn->query($query2);
-                              if (!$result2) die("Fatal Error");
-                              $rowN = $result2->fetch_array(MYSQLI_ASSOC);
+                              $count = $resultC->num_rows;
+                              for ($i = 0; $i < $count; $i++) {
+                                //Control del FOR Loop
+                                $row = $resultC->fetch_array(MYSQLI_ASSOC);
+                                $uD = $row['user_ID'];
 
-                              //Variables
-                              $Nombre2 = $rowN['nombre'];
-                              $Apellido2 = $rowN['apellido'];
-                              $numC = $rowN['num_cuenta'];
+                                //Agarrar Imagen de Tabla perfil
+                                $query3 = "SELECT foto FROM perfil WHERE user_ID = '$uD'";
+                                $result3 = $conn->query($query3);
+                                if (!$result3) die("Fatal Error");
+                                $rowF = $result3->fetch_array(MYSQLI_ASSOC);
+                                $fotoU = $rowF['foto'];
 
-                              //Direccion de Imagen (IMPORTANTE)
-                              $imgUser = "Users/".$numC."/".$fotoU;
-                              ?>
-                                <div class="mdspersonas row">
-                                    <article class="col-md-2">
-                                        <img src="<?php echo $imgUser;?>" class="imgSugerencia" alt="sugerencia"> 
-                                    </article>
-                                    <article class="col-md-5 personas">
-                                        <?php echo $Nombre2.' '.$Apellido2; ?>
-                                    </article>
-                                    <article class="col-md-5">
-                                       <button type="submit" value="submit" id="<?php echo $uD; ?>" name="Boton" class="botonder">SEGUIR</button>
-                                       <?php
-                                       $idFollow = intval($_GET['id']);
-                                        echo $idFollow;
-                                        if (isset($_POST['Boton'])){
-                                            echo "se metio ";
-                                            $querySeg = "INSERT INTO follow (userL_ID, userF_ID) VALUES" . "($id,$uD)";
-                                            $resultSeg = $conn->query($querySeg);
-                                            if (!$resultSeg) die("Fatal Error");
-                                        } 
-                                       ?>
-                                    </article>
-                                </div>
-                              <?php
+                                //Agarrar nombre apellido y numero de cuenta de tabla de usuarios
+                                $query2 = "SELECT nombre, apellido, num_cuenta FROM usuarios WHERE ID = '$uD'";
+                                $result2 = $conn->query($query2);
+                                if (!$result2) die("Fatal Error");
+                                $rowN = $result2->fetch_array(MYSQLI_ASSOC);
+
+                                //Variables
+                                $Nombre2 = $rowN['nombre'];
+                                $Apellido2 = $rowN['apellido'];
+                                $numC = $rowN['num_cuenta'];
+
+                                //Direccion de Imagen (IMPORTANTE)
+                                $imgUser = "Users/".$numC."/".$fotoU;
+                                ?>
+                                  <form class="" action="seguidores.php" method="post">
+                                    <div class="mdspersonas row">
+                                        <article class="col-md-2">
+                                            <img src="<?php echo $imgUser;?>" class="imgSugerencia" alt="sugerencia">
+                                        </article>
+                                        <article class="col-md-5 personas">
+                                            <?php echo $Nombre2.' '.$Apellido2; ?>
+                                        </article>
+                                        <article class="col-md-5">
+                                           <button type="submit" name="buton" value="<?php echo $uD;?>" class="botonder">SEGUIR</button>
+                                        </article>
+                                    </div>
+                                  </form>
+                                <?php
+                              }
+                              if (isset($_POST['buton'])) {
+                                 $nm = $_POST['buton'];
+
+                                 $querySeg = "INSERT INTO follow (userL_ID, userF_ID) VALUES" . "($id,$nm)";
+                                 $resultSeg = $conn->query($querySeg);
+                                 if (!$resultSeg) die("Fatal Error");
+                               }
                             }
+
                           $conn->close();
                         ?>
 
                     </div>
-                    <!----Sugerencias de Personas---->
+                    <!---Sugerencias de Personas---->
 
 
 
-                    <!----Sugerencias de Tags---->
+                    <!---Sugerencias de Tags---->
                     <div id="mdstags">
                         <h6>EXPLORAR TAGS</h6>
                         <div class="mdstags row">
@@ -246,7 +257,7 @@
                             <article class="col-md-5">
                                 <a class="botonder">SEGUIR</a>
                             </article>
-                                
+
                             <article class="col-md-7">
                                 #Dibujo
                             </article>
@@ -270,7 +281,7 @@
                         </div>
                     </div>
                     <!----Sugerencias de Tags---->
-                    
+
                 </div>
             </div>
         </div>
@@ -290,7 +301,7 @@
 <script>
 function showStuff(element)  {
     var tabContents = document.getElementsByClassName('tabContent');
-    for (var i = 0; i < tabContents.length; i++) { 
+    for (var i = 0; i < tabContents.length; i++) {
         tabContents[i].style.display = 'none';
     }
 
@@ -299,7 +310,7 @@ function showStuff(element)  {
     document.getElementById(tabContentIdToShow).style.display = 'block';
 }
 
-function changeColor(id) {    
+function changeColor(id) {
         var tabs = document.getElementsByClassName('tab')
         for (var i = 0; i < tabs.length; ++i) {
             var item = tabs[i];
